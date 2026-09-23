@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>claude-mcp</title>
+  <meta name="description" content="claude-mcp: a personal connector that lets Claude Code read and manage Gabriele Consiglio's own Google Calendar, Drive and Gmail.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a href="/">consiglio.fyi</a>
+      <nav aria-label="App pages">
+        <a href="/claude-mcp/" aria-current="true">App</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+    </header>
+
+    <main class="prose">
+      <h1>claude-mcp</h1>
+      <p class="lede">A personal connector between Claude Code and my own Google accounts.</p>
+
+      <p>claude-mcp is the Google OAuth client used by a locally running
+        <a href="https://github.com/taylorwilsdon/google_workspace_mcp">Google Workspace MCP server</a>.
+        It lets <a href="https://www.anthropic.com/claude-code">Claude Code</a>, an AI coding assistant running on my computer,
+        read and manage the Google Calendar, Google Drive and Gmail data of the Google accounts I own, when I ask it to.</p>
+
+      <div class="callout">
+        This is a personal tool. It is not offered to the public, it has no sign-up, and it is used only by
+        Gabriele Consiglio with his own Google accounts.
+      </div>
+
+      <h2>What it does</h2>
+      <ul>
+        <li><strong>Calendar</strong>: list calendars and events, check availability, create and update events.</li>
+        <li><strong>Drive</strong>: search, read and create files.</li>
+        <li><strong>Gmail</strong>: search and read messages, draft and send email, manage labels.</li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>The MCP server runs on my own Mac. When I sign in, Google issues OAuth tokens that are stored only on that machine.
+        The server calls Google APIs on my behalf and returns the results to Claude Code in the same session.
+        There is no server, database or account operated by this app anywhere else.</p>
+
+      <h2>Your data</h2>
+      <p>How Google user data is accessed, used, stored and shared is described in the
+        <a href="/privacy/">privacy policy</a>. Use of the app is governed by the <a href="/terms/">terms of service</a>.</p>
+
+      <h2>Contact</h2>
+      <p><a href="mailto:gabriele@consiglio.fyi">gabriele@consiglio.fyi</a></p>
+    </main>
+
+    <footer class="footer">
+      <span>© Gabriele Consiglio</span>
+      <nav aria-label="Other pages">
+        <a href="/">CV</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+    </footer>
+  </div>
+</body>
+</html>
