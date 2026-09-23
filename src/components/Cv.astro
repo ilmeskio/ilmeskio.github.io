@@ -4,11 +4,13 @@ import {
   community,
   education,
   experience,
-  figures,
+  highlights,
   labels,
   languages,
+  photo,
   profile,
   skills,
+  years,
   type Lang,
 } from "../data/cv";
 
@@ -21,6 +23,7 @@ const { lang } = Astro.props;
 
 <main class="cv">
   <section class="hero">
+    <img class="portrait" src={photo.src} alt={photo.alt[lang]} width="480" height="480" />
     <p class="eyebrow">{profile.location[lang]}</p>
     <h1>{profile.name}</h1>
     <p class="headline">{profile.headline[lang]}</p>
@@ -33,12 +36,20 @@ const { lang } = Astro.props;
     </ul>
   </section>
 
-  <ul class="figures">
+  <ul class="highlights">
+    <li class="years">
+      <span class="years-value">{years.value}</span>
+      <span class="highlight-label">{years.label[lang]}</span>
+    </li>
     {
-      figures.map((f) => (
+      highlights.map((h) => (
         <li>
-          <span class="figure-value">{f.value}</span>
-          <span class="figure-label">{f.label[lang]}</span>
+          <span class="highlight-label">{h.label[lang]}</span>
+          <ul class="highlight-items">
+            {h.items.map((i) => (
+              <li>{i[lang]}</li>
+            ))}
+          </ul>
         </li>
       ))
     }

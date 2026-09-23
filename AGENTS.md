@@ -24,10 +24,6 @@ Both are squashed git subtrees, excluded from `tsconfig.json`; never edit them b
 - `src/styles/global.css` is the only stylesheet, imported by `Base`. Colors are custom properties on `:root`, redefined under `prefers-color-scheme: dark`; use the tokens rather than literal colors. It includes print rules: the CV has a "Print / PDF" button.
 - `astro.config.mjs` sets `site` (used for canonical and `hreflang` URLs) and `trailingSlash: "always"`. When the custom domain `consiglio.fyi` goes live (issue #1), change `site` and add `public/CNAME`.
 
-## Content sources
-
-The CV wording follows Gabriele's LinkedIn profile (clearer and shorter); figures such as "1M+ daily users" and "−50% infrastructure costs" come from the "Gabriele Consiglio - Curriculum 2025" Google Doc. Do not invent roles, dates or results: a fact nobody has supplied is left out.
-
 ## Constraints
 
 - The Google Cloud OAuth consent screen will link to `/claude-mcp/`, `/privacy/` and `/terms/`. The paths can still change; once the app's release on the consent screen is complete they must stay stable. When the app's requested scopes change, update the scope table in `src/pages/privacy/index.astro` (and its effective date).

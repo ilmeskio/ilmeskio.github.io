@@ -99,6 +99,23 @@ a:hover {
   padding: clamp(3rem, 10vw, 6rem) 0 2.5rem;
 }
 
+.portrait {
+  float: right;
+  width: clamp(6.5rem, 22vw, 11rem);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0 0 1rem 1.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px var(--rule), 0 0 0 0.45rem var(--surface), 0 0 0 calc(0.45rem + 1px) var(--rule);
+}
+
+.hero::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .hero .eyebrow {
   margin: 0 0 1rem;
   font-family: var(--mono);
@@ -172,42 +189,70 @@ a:hover {
   color: var(--accent);
 }
 
-/* ---------- key figures ---------- */
+/* ---------- highlights band ---------- */
 
-.figures {
+.highlights {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   margin: 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--rule);
+}
+
+.highlights > li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem 1.5rem 1.5rem 0;
   border-bottom: 1px solid var(--rule);
 }
 
-.figures li {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.5rem 1.25rem 1.5rem 0;
-}
-
-.figures li + li {
-  padding-left: 1.25rem;
+.highlights > li:nth-child(even) {
+  padding-left: 1.5rem;
+  padding-right: 0;
   border-left: 1px solid var(--rule);
 }
 
-.figure-value {
-  font-size: clamp(2rem, 6vw, 2.75rem);
+.years-value {
+  font-size: clamp(2.5rem, 7vw, 3.5rem);
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--accent);
 }
 
-.figure-label {
+.highlight-label {
   font-family: var(--mono);
   font-size: 0.72rem;
-  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--muted);
+}
+
+.years .highlight-label {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.highlight-items {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.highlight-items li::before {
+  content: "";
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin: 0 0.6rem 0.2rem 0;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: middle;
 }
 
 /* ---------- CV sections ---------- */
@@ -536,25 +581,20 @@ a:hover {
     position: static;
   }
 
-  .figures {
+  .highlights {
     grid-template-columns: 1fr;
   }
 
-  .figures li,
-  .figures li + li {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.9rem 0;
+  .highlights > li,
+  .highlights > li:nth-child(even) {
+    padding: 1.25rem 0;
     border-left: 0;
   }
 
-  .figures li + li {
-    border-top: 1px solid var(--rule);
-  }
-
-  .figure-value {
-    min-width: 5rem;
+  .portrait {
+    float: none;
+    display: block;
+    margin: 0 0 1.5rem;
   }
 }
 
@@ -580,7 +620,7 @@ a:hover {
     font-size: 11pt;
   }
 
-  .figures,
+  .highlights,
   .role {
     break-inside: avoid;
   }

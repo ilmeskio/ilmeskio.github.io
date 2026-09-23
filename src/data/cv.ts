@@ -1,5 +1,5 @@
 // CV content, one entry per fact, each text in both languages.
-// Wording follows LinkedIn; the figures come from the "Curriculum 2025" Google Doc.
+// Where each part comes from: docs/cv-sources.md.
 // Optional fields (a client's period or summary) are left out until the facts are known.
 
 export type Lang = "en" | "it";
@@ -35,18 +35,44 @@ export const profile = {
   headline: t("Freelance software developer & consultant", "Sviluppatore software e consulente freelance"),
   location: t("Milan, Italy", "Milano"),
   summary: t(
-    "Full-stack engineer with more than ten years of building web applications, in the cloud and on premise. Former CTO and product manager: I help teams decide what is worth building, then build it with them.",
-    "Ingegnere full-stack con più di dieci anni di applicazioni web, in cloud e on premise. Ex CTO e product manager: aiuto i team a decidere cosa vale la pena costruire, e poi lo costruisco con loro.",
+    "Full-stack engineer with more than ten years of building web applications, in the cloud and on premise. Former CTO and product manager: I help teams decide what is worth building, then build it with them, with AI coding agents as part of the team.",
+    "Ingegnere full-stack con più di dieci anni di applicazioni web, in cloud e on premise. Ex CTO e product manager: aiuto i team a decidere cosa vale la pena costruire, e poi lo costruisco con loro, con gli agenti AI come parte del team.",
   ),
   email: "gabriele@consiglio.fyi",
   github: "ilmeskio",
   linkedin: "gabrieleconsiglio",
 };
 
-export const figures: { value: string; label: Text }[] = [
-  { value: "10+", label: t("years shipping web software", "anni di software web in produzione") },
-  { value: "1M+", label: t("daily users served at WeSchool", "utenti al giorno serviti in WeSchool") },
-  { value: "−50%", label: t("infrastructure costs after the re-architecture", "costi di infrastruttura dopo la nuova architettura") },
+export const photo = {
+  src: "/gabriele-consiglio.jpg",
+  alt: t("Portrait of Gabriele Consiglio", "Ritratto di Gabriele Consiglio"),
+};
+
+/** The band under the hero: years of experience, then what I work with and how. */
+export const years = { value: "10+", label: t("years shipping web software", "anni di software web in produzione") };
+
+export const highlights: { label: Text; items: Text[] }[] = [
+  {
+    label: t("Favourite stack", "Stack preferito"),
+    items: [t("TypeScript", "TypeScript"), t("Effect", "Effect")],
+  },
+  {
+    label: t("Quality", "Qualità"),
+    items: [
+      t("CI on every change", "CI su ogni modifica"),
+      t("Unit, e2e and visual tests", "Test unitari, e2e e visuali"),
+      t("Product analytics", "Analisi di prodotto"),
+    ],
+  },
+  {
+    label: t("Method", "Metodo"),
+    items: [
+      t("Agentic development", "Sviluppo agentico"),
+      t("Product discovery", "Product discovery"),
+      t("Agile / Kanban", "Agile / Kanban"),
+      t("Lean, mobile-first", "Lean, mobile-first"),
+    ],
+  },
 ];
 
 export const experience: Job[] = [
@@ -198,12 +224,20 @@ export const community = [
 
 export const skills: { group: Text; items: string[] }[] = [
   {
-    group: t("Engineering", "Sviluppo"),
-    items: ["TypeScript", "React", "Remix", "PHP", "Symfony", "SQL", "Docker", "Linux", "AWS"],
+    group: t("Languages and frameworks", "Linguaggi e framework"),
+    items: ["TypeScript", "Effect", "React", "React Router", "Remix", "Astro", "PHP", "Symfony", "SQL"],
   },
   {
-    group: t("Product", "Prodotto"),
-    items: ["Product discovery", "Roadmapping", "KPI", "Agile / Kanban", "Team leadership"],
+    group: t("Data and infrastructure", "Dati e infrastruttura"),
+    items: ["PostgreSQL", "Drizzle", "Docker", "Linux", "AWS", "Render"],
+  },
+  {
+    group: t("Quality and delivery", "Qualità e rilascio"),
+    items: ["GitHub Actions", "CircleCI", "Vitest", "Testcontainers", "Playwright", "Storybook", "Chromatic", "Biome"],
+  },
+  {
+    group: t("Product and method", "Prodotto e metodo"),
+    items: ["Claude Code agents", "Product discovery", "Product analytics", "PostHog", "Roadmapping", "Agile / Kanban"],
   },
 ];
 
