@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for coding agents working in this repository.
 
 ## What this is
 
@@ -8,7 +8,12 @@ Static personal site (CV + pages for the `claude-mcp` Google OAuth app), built w
 
 `astro check` does not support TypeScript 7, which is why `typescript` is pinned to 6.
 
-The astro npm package ships only compiled `dist/` and type declarations — no docs and no readable source. For Astro's own documentation or source, go to `withastro/docs` and `withastro/astro` at the tag matching the installed version (`node_modules/astro/package.json`).
+For Astro, read the vendored copies, not the web and not `node_modules/astro` (which holds only compiled `dist/` and type declarations):
+
+- `vendor/astro/` — `packages/astro/src` of `withastro/astro` at the tag of the installed version.
+- `vendor/astro-docs/` — the English docs (`src/content/docs/en` of `withastro/docs`).
+
+Both are squashed git subtrees, excluded from `tsconfig.json`; never edit them by hand. After upgrading `astro`, run `scripts/vendor-sync.sh` (needs a clean working tree) to bring both to the installed version.
 
 ## How the pages fit together
 
