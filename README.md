@@ -1,6 +1,6 @@
 # consiglio.fyi
 
-Personal site of Gabriele Consiglio, served by GitHub Pages at <https://consiglio.fyi>.
+Personal site of Gabriele Consiglio, served by GitHub Pages at <https://ilmeskio.github.io>. The custom domain (`consiglio.fyi`, via a `CNAME` file) is not wired up yet — see issue #1.
 
 | Path | Page |
 |---|---|
