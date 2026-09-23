@@ -20,11 +20,11 @@ Both are squashed git subtrees, excluded from `tsconfig.json`; never edit them b
 - `src/layouts/Base.astro` is the shell of every page: `<head>` (Google Fonts Newsreader + IBM Plex Mono, favicon, canonical URL), the `.wrap > .topbar / main / .footer` skeleton, and two named slots, `nav` (top bar) and `footer`.
 - Two page families, each with its own layout on top of `Base`:
   - CV — `CvPage.astro`, used by `src/pages/index.astro` (EN) and `src/pages/it/index.astro` (IT). It renders `src/components/Cv.astro`, which reads everything from `src/data/cv.ts`. Every text there is a `{ en, it }` pair, so both languages change together. A freelance client needs only a name and a role; period and summary render when present.
-  - App pages — `AppPage.astro`, used by `claude-mcp/`, `privacy/`, `terms/`. It owns the App/Privacy/Terms nav (`aria-current` on the current page), the footer links and the closing Contact section; the page supplies only its body.
+  - App pages — `AppPage.astro`, used by `claude-mcp/`, `claude-mcp/privacy/`, `claude-mcp/terms/`. It owns the App/Privacy/Terms nav (`aria-current` on the current page), the footer links and the closing Contact section; the page supplies only its body. The CV and the app pages do not link to each other.
 - `src/styles/global.css` is the only stylesheet, imported by `Base`. Colors are custom properties on `:root`, redefined under `prefers-color-scheme: dark`; use the tokens rather than literal colors. It includes print rules: the CV has a "Print / PDF" button.
 - `astro.config.mjs` sets `site` (used for canonical and `hreflang` URLs) and `trailingSlash: "always"`. When the custom domain `consiglio.fyi` goes live (issue #1), change `site` and add `public/CNAME`.
 
 ## Constraints
 
-- The Google Cloud OAuth consent screen will link to `/claude-mcp/`, `/privacy/` and `/terms/`. The paths can still change; once the app's release on the consent screen is complete they must stay stable. When the app's requested scopes change, update the scope table in `src/pages/privacy/index.astro` (and its effective date).
+- The Google Cloud OAuth consent screen will link to `/claude-mcp/`, `/claude-mcp/privacy/` and `/claude-mcp/terms/`. The paths can still change; once the app's release on the consent screen is complete they must stay stable. When the app's requested scopes change, update the scope table in `src/pages/claude-mcp/privacy/index.astro` (and its effective date).
 - Deploy runs from `.github/workflows/deploy.yml` on push to `main`; the repository's Pages source must be "GitHub Actions".

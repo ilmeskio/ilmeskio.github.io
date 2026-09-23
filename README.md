@@ -7,8 +7,10 @@ Personal site of Gabriele Consiglio, built with [Astro](https://astro.build) and
 | `/` | CV (English) |
 | `/it/` | CV (Italian) |
 | `/claude-mcp/` | Home page of the `claude-mcp` Google OAuth app |
-| `/privacy/` | Privacy policy |
-| `/terms/` | Terms of service |
+| `/claude-mcp/privacy/` | Its privacy policy |
+| `/claude-mcp/terms/` | Its terms of service |
+
+The `claude-mcp` pages are not linked from the CV, and they do not link back to it.
 
 The CV content lives in `src/data/cv.ts`, with every text in both languages; both CV pages render from it.
 
@@ -28,4 +30,4 @@ pnpm check      # type-check .astro and .ts files
 
 Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and deploys `dist/` to GitHub Pages. The repository's Pages source must be set to **GitHub Actions**.
 
-The Google Cloud OAuth consent screen links to `/claude-mcp/`, `/privacy/` and `/terms/`: once the app's release is complete, keep those URLs stable, and update the scope table in `src/pages/privacy/index.astro` whenever the app requests different scopes.
+The Google Cloud OAuth consent screen links to `/claude-mcp/`, `/claude-mcp/privacy/` and `/claude-mcp/terms/`: once the app's release is complete, keep those URLs stable, and update the scope table in `src/pages/claude-mcp/privacy/index.astro` whenever the app requests different scopes.
