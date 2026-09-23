@@ -1,6 +1,6 @@
 // CV content, one entry per fact, each text in both languages.
 // Wording follows LinkedIn; the figures come from the "Curriculum 2025" Google Doc.
-// A value in [brackets] is a placeholder still to be filled in.
+// Optional fields (a client's period or summary) are left out until the facts are known.
 
 export type Lang = "en" | "it";
 export type Text = Record<Lang, string>;
@@ -15,8 +15,9 @@ export interface Role {
 export interface Client {
   name: string;
   url?: string;
-  period: Text;
-  summary: Text;
+  role: Text;
+  period?: Text;
+  summary?: Text;
 }
 
 export interface Job {
@@ -71,21 +72,19 @@ export const experience: Job[] = [
     clients: [
       {
         name: "Tomura",
-        period: t("[period]", "[periodo]"),
-        summary: t("[What you did for Tomura.]", "[Cosa hai fatto per Tomura.]"),
+        role: t("Product Engineer", "Product Engineer"),
       },
       {
         name: "WAI",
-        period: t("[period]", "[periodo]"),
-        summary: t("[What you did for WAI.]", "[Cosa hai fatto per WAI.]"),
+        role: t("Product Engineer", "Product Engineer"),
       },
       {
         name: "Foorban",
-        period: t("[period]", "[periodo]"),
-        summary: t("[What you did for Foorban.]", "[Cosa hai fatto per Foorban.]"),
+        role: t("Product Engineer", "Product Engineer"),
       },
       {
         name: "Discentis",
+        role: t("Software Engineer", "Software Engineer"),
         period: t("2025 – present", "2025 – oggi"),
         summary: t(
           "Technical foundation of the community platform, as a TypeScript monorepo.",
@@ -94,6 +93,7 @@ export const experience: Job[] = [
       },
       {
         name: "E-One",
+        role: t("Software Engineer", "Software Engineer"),
         period: t("Jan – Mar 2025", "gen – mar 2025"),
         summary: t(
           "New behaviour in a legacy CRM (PHP 5.6, Symfony 2.3) through targeted refactoring and tests, without breaking changes.",

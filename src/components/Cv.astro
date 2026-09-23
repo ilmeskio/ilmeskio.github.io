@@ -17,7 +17,6 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const isPlaceholder = (s: string) => s.startsWith("[");
 ---
 
 <main class="cv">
@@ -76,10 +75,11 @@ const isPlaceholder = (s: string) => s.startsWith("[");
                 <p class="clients-label">{labels.clients[lang]}</p>
                 <ul class="clients">
                   {job.clients.map((c) => (
-                    <li class:list={["client", { placeholder: isPlaceholder(c.summary[lang]) }]}>
+                    <li class="client">
                       <span class="client-name">{c.url ? <a href={c.url}>{c.name}</a> : c.name}</span>
-                      <span class="meta">{c.period[lang]}</span>
-                      <span class="client-summary">{c.summary[lang]}</span>
+                      <span class="client-role">{c.role[lang]}</span>
+                      {c.period && <span class="meta">{c.period[lang]}</span>}
+                      {c.summary && <span class="client-summary">{c.summary[lang]}</span>}
                     </li>
                   ))}
                 </ul>

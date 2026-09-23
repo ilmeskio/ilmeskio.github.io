@@ -19,14 +19,14 @@ Both are squashed git subtrees, excluded from `tsconfig.json`; never edit them b
 
 - `src/layouts/Base.astro` is the shell of every page: `<head>` (Google Fonts Newsreader + IBM Plex Mono, favicon, canonical URL), the `.wrap > .topbar / main / .footer` skeleton, and two named slots, `nav` (top bar) and `footer`.
 - Two page families, each with its own layout on top of `Base`:
-  - CV — `CvPage.astro`, used by `src/pages/index.astro` (EN) and `src/pages/it/index.astro` (IT). It renders `src/components/Cv.astro`, which reads everything from `src/data/cv.ts`. Every text there is a `{ en, it }` pair, so both languages change together; a value in `[brackets]` is a placeholder still to fill, and a client card whose summary is a placeholder renders with a dashed border.
+  - CV — `CvPage.astro`, used by `src/pages/index.astro` (EN) and `src/pages/it/index.astro` (IT). It renders `src/components/Cv.astro`, which reads everything from `src/data/cv.ts`. Every text there is a `{ en, it }` pair, so both languages change together. A freelance client needs only a name and a role; period and summary render when present.
   - App pages — `AppPage.astro`, used by `claude-mcp/`, `privacy/`, `terms/`. It owns the App/Privacy/Terms nav (`aria-current` on the current page), the footer links and the closing Contact section; the page supplies only its body.
 - `src/styles/global.css` is the only stylesheet, imported by `Base`. Colors are custom properties on `:root`, redefined under `prefers-color-scheme: dark`; use the tokens rather than literal colors. It includes print rules: the CV has a "Print / PDF" button.
 - `astro.config.mjs` sets `site` (used for canonical and `hreflang` URLs) and `trailingSlash: "always"`. When the custom domain `consiglio.fyi` goes live (issue #1), change `site` and add `public/CNAME`.
 
 ## Content sources
 
-The CV wording follows Gabriele's LinkedIn profile (clearer and shorter); figures such as "1M+ daily users" and "−50% infrastructure costs" come from the "Gabriele Consiglio - Curriculum 2025" Google Doc. Do not invent roles, dates or results: missing facts stay as `[bracketed]` placeholders.
+The CV wording follows Gabriele's LinkedIn profile (clearer and shorter); figures such as "1M+ daily users" and "−50% infrastructure costs" come from the "Gabriele Consiglio - Curriculum 2025" Google Doc. Do not invent roles, dates or results: a fact nobody has supplied is left out.
 
 ## Constraints
 

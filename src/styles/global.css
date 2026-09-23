@@ -372,9 +372,9 @@ a:hover {
   background: var(--surface);
 }
 
-.client.placeholder {
-  border-style: dashed;
-  background: transparent;
+.client-role {
+  font-style: italic;
+  color: var(--muted);
 }
 
 .client-name {
