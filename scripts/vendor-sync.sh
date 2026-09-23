@@ -20,7 +20,7 @@ trap 'rm -rf "$tmp"' EXIT
 vendor() {
   local repo=$1 ref=$2 src=$3 dest=$4
   local clone="$tmp/${dest//\//_}"
-  git clone -q --depth 1 --branch "$ref" --filter=blob:none --sparse "https://github.com/$repo.git" "$clone"
+  git -c advice.detachedHead=false clone -q --depth 1 --branch "$ref" --filter=blob:none --sparse "https://github.com/$repo.git" "$clone"
   git -C "$clone" sparse-checkout set "$src"
   local sha split
   sha=$(git -C "$clone" rev-parse --short HEAD)
