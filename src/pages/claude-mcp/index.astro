@@ -1,0 +1,38 @@
+---
+import AppPage from "../../layouts/AppPage.astro";
+---
+
+<AppPage
+  title="claude-mcp"
+  description="claude-mcp: a personal connector that lets Claude Code read and manage Gabriele Consiglio's own Google Calendar, Drive and Gmail."
+  current="app"
+>
+  <h1>claude-mcp</h1>
+  <p class="lede">A personal connector between Claude Code and my own Google accounts.</p>
+
+  <p>claude-mcp is the Google OAuth client used by a locally running
+    <a href="https://github.com/taylorwilsdon/google_workspace_mcp">Google Workspace MCP server</a>.
+    It lets <a href="https://www.anthropic.com/claude-code">Claude Code</a>, an AI coding assistant running on my computer,
+    read and manage the Google Calendar, Google Drive and Gmail data of the Google accounts I own, when I ask it to.</p>
+
+  <div class="callout">
+    This is a personal tool. It is not offered to the public, it has no sign-up, and it is used only by
+    Gabriele Consiglio with his own Google accounts.
+  </div>
+
+  <h2>What it does</h2>
+  <ul>
+    <li><strong>Calendar</strong>: list calendars and events, check availability, create and update events.</li>
+    <li><strong>Drive</strong>: search, read and create files.</li>
+    <li><strong>Gmail</strong>: search and read messages, draft and send email, manage labels.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <p>The MCP server runs on my own Mac. When I sign in, Google issues OAuth tokens that are stored only on that machine.
+    The server calls Google APIs on my behalf and returns the results to Claude Code in the same session.
+    There is no server, database or account operated by this app anywhere else.</p>
+
+  <h2>Your data</h2>
+  <p>How Google user data is accessed, used, stored and shared is described in the
+    <a href="/privacy/">privacy policy</a>. Use of the app is governed by the <a href="/terms/">terms of service</a>.</p>
+</AppPage>

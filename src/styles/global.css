@@ -12,7 +12,7 @@
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --measure: 44rem;
+  --measure: 48rem;
   --gutter: clamp(1rem, 4vw, 2.5rem);
 }
 
@@ -95,39 +95,119 @@ a:hover {
 /* ---------- CV header ---------- */
 
 .hero {
+  position: relative;
   padding: clamp(3rem, 10vw, 6rem) 0 2.5rem;
-  border-bottom: 1px solid var(--rule);
+}
+
+.hero .eyebrow {
+  margin: 0 0 1rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .hero h1 {
   margin: 0;
   font-weight: 400;
-  font-size: clamp(2.75rem, 9vw, 4.5rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.75rem, 10vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
 }
 
-.hero .role {
-  margin: 0.75rem 0 0;
+.hero .headline {
+  margin: 0.9rem 0 0;
   font-style: italic;
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
   color: var(--muted);
 }
 
 .hero .summary {
   margin: 1.75rem 0 0;
   max-width: 36rem;
+  font-size: 1.2rem;
 }
 
 .contacts {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  margin: 1.75rem 0 0;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin: 2rem 0 0;
   padding: 0;
   list-style: none;
   font-family: var(--mono);
   font-size: 0.85rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+
+.button:hover {
+  color: var(--accent-ink);
+  filter: brightness(1.08);
+}
+
+.linkish {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.linkish:hover {
+  color: var(--accent);
+}
+
+/* ---------- key figures ---------- */
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.figures li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.5rem 1.25rem 1.5rem 0;
+}
+
+.figures li + li {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--rule);
+}
+
+.figure-value {
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.figure-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--muted);
 }
 
 /* ---------- CV sections ---------- */
@@ -141,6 +221,9 @@ a:hover {
 }
 
 .section > h2 {
+  position: sticky;
+  top: 1.5rem;
+  align-self: start;
   margin: 0.3rem 0 0;
   font-family: var(--mono);
   font-weight: 500;
@@ -152,6 +235,12 @@ a:hover {
 
 .section > p {
   margin: 0;
+}
+
+.meta {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
 }
 
 .entry + .entry {
@@ -167,9 +256,6 @@ a:hover {
 
 .entry .meta {
   margin: 0.2rem 0 0;
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--muted);
 }
 
 .entry p,
@@ -177,8 +263,141 @@ a:hover {
   margin: 0.6rem 0 0;
 }
 
-.entry ul {
+/* ---------- experience timeline ---------- */
+
+.timeline,
+.roles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.job + .job {
+  margin-top: 2.75rem;
+}
+
+.company {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.about {
+  margin: 0.25rem 0 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.roles {
+  margin-top: 1rem;
+  border-left: 1px solid var(--rule);
+}
+
+.role {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.role + .role {
+  margin-top: 1.5rem;
+}
+
+.role::before {
+  content: "";
+  position: absolute;
+  left: -0.3rem;
+  top: 0.55rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+}
+
+.role:first-child::before {
+  background: var(--accent);
+}
+
+.role h4 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.role .meta {
+  margin: 0.15rem 0 0;
+}
+
+.role ul {
+  margin: 0.6rem 0 0;
   padding-left: 1.1rem;
+}
+
+.role li + li {
+  margin-top: 0.35rem;
+}
+
+.role li::marker {
+  color: var(--accent);
+}
+
+.clients-label {
+  margin: 1.75rem 0 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.clients {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.client {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.client.placeholder {
+  border-style: dashed;
+  background: transparent;
+}
+
+.client-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.client-summary {
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+/* ---------- skills, languages ---------- */
+
+.skill-groups {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.skill-group {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+  color: var(--muted);
 }
 
 .tags {
@@ -197,6 +416,15 @@ a:hover {
   border: 1px solid var(--rule);
   border-radius: 999px;
   background: var(--surface);
+}
+
+.langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 /* ---------- prose pages (app, privacy, terms) ---------- */
@@ -303,12 +531,47 @@ a:hover {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
+  .section > h2 {
+    position: static;
+  }
+
+  .figures {
+    grid-template-columns: 1fr;
+  }
+
+  .figures li,
+  .figures li + li {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-left: 0;
+  }
+
+  .figures li + li {
+    border-top: 1px solid var(--rule);
+  }
+
+  .figure-value {
+    min-width: 5rem;
+  }
 }
 
 @media print {
   .topbar,
-  .footer {
+  .footer,
+  .linkish {
     display: none;
+  }
+
+  .section > h2 {
+    position: static;
+  }
+
+  .job,
+  .client {
+    break-inside: avoid;
   }
 
   body {
@@ -317,7 +580,8 @@ a:hover {
     font-size: 11pt;
   }
 
-  .section {
+  .figures,
+  .role {
     break-inside: avoid;
   }
 }

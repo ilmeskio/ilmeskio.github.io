@@ -1,0 +1,32 @@
+---
+// Layout for the two CV translations: / (EN) and /it/ (IT).
+import Base from "./Base.astro";
+import Cv from "../components/Cv.astro";
+import { profile, type Lang } from "../data/cv";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const home = lang === "en" ? "/" : "/it/";
+const description = {
+  en: `${profile.name} — ${profile.headline.en}. CV and contacts.`,
+  it: `${profile.name} — ${profile.headline.it}. CV e contatti.`,
+}[lang];
+---
+
+<Base title={profile.name} description={description} lang={lang} cvAlternates home={home}>
+  <nav slot="nav" aria-label={lang === "en" ? "Language" : "Lingua"}>
+    <a href="/" hreflang="en" aria-current={lang === "en" ? "true" : undefined}>EN</a>
+    <a href="/it/" hreflang="it" aria-current={lang === "it" ? "true" : undefined}>IT</a>
+  </nav>
+
+  <Cv lang={lang} />
+
+  <nav slot="footer" aria-label={lang === "en" ? "Other pages" : "Altre pagine"}>
+    <a href="/claude-mcp/">claude-mcp</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/terms/">Terms</a>
+  </nav>
+</Base>

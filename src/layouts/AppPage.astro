@@ -1,0 +1,36 @@
+---
+// Layout for the claude-mcp OAuth app pages: /claude-mcp/, /privacy/, /terms/.
+// The Google consent screen links to these three paths.
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  current: "app" | "privacy" | "terms";
+}
+
+const { title, description, current } = Astro.props;
+
+const pages = [
+  { key: "app", href: "/claude-mcp/", label: "App" },
+  { key: "privacy", href: "/privacy/", label: "Privacy" },
+  { key: "terms", href: "/terms/", label: "Terms" },
+] as const;
+---
+
+<Base title={title} description={description}>
+  <nav slot="nav" aria-label="App pages">
+    {pages.map((p) => <a href={p.href} aria-current={p.key === current ? "true" : undefined}>{p.label}</a>)}
+  </nav>
+
+  <main class="prose">
+    <slot />
+    <h2>Contact</h2>
+    <p><a href="mailto:gabriele@consiglio.fyi">gabriele@consiglio.fyi</a></p>
+  </main>
+
+  <nav slot="footer" aria-label="Other pages">
+    <a href="/">CV</a>
+    {pages.filter((p) => p.key !== current).map((p) => <a href={p.href}>{p.key === "app" ? "claude-mcp" : p.label}</a>)}
+  </nav>
+</Base>

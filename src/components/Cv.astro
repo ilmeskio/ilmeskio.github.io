@@ -1,0 +1,153 @@
+---
+// The CV, rendered from src/data/cv.ts in one language.
+import {
+  community,
+  education,
+  experience,
+  figures,
+  labels,
+  languages,
+  profile,
+  skills,
+  type Lang,
+} from "../data/cv";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const isPlaceholder = (s: string) => s.startsWith("[");
+---
+
+<main class="cv">
+  <section class="hero">
+    <p class="eyebrow">{profile.location[lang]}</p>
+    <h1>{profile.name}</h1>
+    <p class="headline">{profile.headline[lang]}</p>
+    <p class="summary">{profile.summary[lang]}</p>
+    <ul class="contacts">
+      <li><a class="button" href={`mailto:${profile.email}`}>{profile.email}</a></li>
+      <li><a href={`https://github.com/${profile.github}`}>GitHub</a></li>
+      <li><a href={`https://www.linkedin.com/in/${profile.linkedin}/`}>LinkedIn</a></li>
+      <li><button type="button" class="linkish" onclick="window.print()">{labels.print[lang]}</button></li>
+    </ul>
+  </section>
+
+  <ul class="figures">
+    {
+      figures.map((f) => (
+        <li>
+          <span class="figure-value">{f.value}</span>
+          <span class="figure-label">{f.label[lang]}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <section class="section" aria-labelledby="experience">
+    <h2 id="experience">{labels.experience[lang]}</h2>
+    <ol class="timeline">
+      {
+        experience.map((job) => (
+          <li class="job">
+            <h3 class="company">{job.company}</h3>
+            {job.about && <p class="about">{job.about[lang]}</p>}
+            <ol class="roles">
+              {job.roles.map((role) => (
+                <li class="role">
+                  <h4>{role.title[lang]}</h4>
+                  <p class="meta">
+                    {role.period[lang]}
+                    {role.place && <> · {role.place[lang]}</>}
+                  </p>
+                  {role.highlights.length > 0 && (
+                    <ul>
+                      {role.highlights.map((h) => (
+                        <li>{h[lang]}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ol>
+            {job.clients && (
+              <>
+                <p class="clients-label">{labels.clients[lang]}</p>
+                <ul class="clients">
+                  {job.clients.map((c) => (
+                    <li class:list={["client", { placeholder: isPlaceholder(c.summary[lang]) }]}>
+                      <span class="client-name">{c.url ? <a href={c.url}>{c.name}</a> : c.name}</span>
+                      <span class="meta">{c.period[lang]}</span>
+                      <span class="client-summary">{c.summary[lang]}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="community">
+    <h2 id="community">{labels.community[lang]}</h2>
+    <div>
+      {
+        community.map((c) => (
+          <article class="entry">
+            <h3>{c.name} — {c.role[lang]}</h3>
+            <p class="meta">{c.period[lang]}</p>
+            <p>{c.summary[lang]}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="skills">
+    <h2 id="skills">{labels.skills[lang]}</h2>
+    <div class="skill-groups">
+      {
+        skills.map((g) => (
+          <div>
+            <p class="skill-group">{g.group[lang]}</p>
+            <ul class="tags">
+              {g.items.map((s) => (
+                <li>{s}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="education">
+    <h2 id="education">{labels.education[lang]}</h2>
+    <div>
+      {
+        education.map((e) => (
+          <article class="entry">
+            <h3>{e.degree[lang]}</h3>
+            <p class="meta">{e.school} · {e.year}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="languages">
+    <h2 id="languages">{labels.languages[lang]}</h2>
+    <ul class="langs">
+      {
+        languages.map((l) => (
+          <li>
+            <span>{l.name[lang]}</span> <span class="meta">{l.level[lang]}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</main>
