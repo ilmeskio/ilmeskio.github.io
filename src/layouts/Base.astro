@@ -1,0 +1,57 @@
+---
+// Shell shared by every page: <head>, top bar, footer.
+// Pages fill the "nav" slot (top bar, right side) and the "footer" slot.
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: "en" | "it";
+  /** Emit hreflang alternates for the two CV translations. */
+  cvAlternates?: boolean;
+  home?: string;
+}
+
+const { title, description, lang = "en", cvAlternates = false, home = "/" } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {
+      cvAlternates && (
+        <>
+          <link rel="alternate" hreflang="en" href={new URL("/", Astro.site)} />
+          <link rel="alternate" hreflang="it" href={new URL("/it/", Astro.site)} />
+        </>
+      )
+    }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="topbar">
+        <a href={home}>consiglio.fyi</a>
+        <slot name="nav" />
+      </header>
+
+      <slot />
+
+      <footer class="footer">
+        <span>© Gabriele Consiglio</span>
+        <slot name="footer" />
+      </footer>
+    </div>
+  </body>
+</html>
