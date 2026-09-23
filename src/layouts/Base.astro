@@ -1,6 +1,6 @@
 ---
 // Shell shared by every page: <head>, top bar, footer.
-// Pages fill the "nav" slot (top bar, right side) and the "footer" slot.
+// Pages fill the "nav" slot (top bar, right side) and, optionally, the "footer" slot.
 import "../styles/global.css";
 
 interface Props {
@@ -9,10 +9,12 @@ interface Props {
   lang?: "en" | "it";
   /** Emit hreflang alternates for the two CV translations. */
   cvAlternates?: boolean;
+  /** Target and text of the top-left link. */
   home?: string;
+  brand?: string;
 }
 
-const { title, description, lang = "en", cvAlternates = false, home = "/" } = Astro.props;
+const { title, description, lang = "en", cvAlternates = false, home = "/", brand = "consiglio.fyi" } = Astro.props;
 ---
 
 <!doctype html>
@@ -42,7 +44,7 @@ const { title, description, lang = "en", cvAlternates = false, home = "/" } = As
   <body>
     <div class="wrap">
       <header class="topbar">
-        <a href={home}>consiglio.fyi</a>
+        <a href={home}>{brand}</a>
         <slot name="nav" />
       </header>
 
