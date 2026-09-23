@@ -9,7 +9,9 @@
 # vendor/astro-docs  withastro/docs   src/content/docs/en  at main (docs have no version tags)
 #
 # Each run fetches one commit per repo (depth 1), splits the wanted folder out of
-# it, and adds it with `git subtree add` the first time, `git subtree merge` after.
+# it, removes the previous copy and adds the new one with `git subtree add --squash`.
+# Replacing instead of `git subtree merge` keeps it independent of history, which
+# squash-merged pull requests flatten.
 set -euo pipefail
 
 root="$(git rev-parse --show-toplevel)"
@@ -26,9 +28,11 @@ vendor() {
   sha=$(git -C "$clone" rev-parse --short HEAD)
   split=$(git -C "$clone" subtree split -q --prefix="$src")
   git -C "$root" fetch -q "$clone" "$split"
-  local verb=add
-  [ -d "$root/$dest" ] && verb=merge
-  git -C "$root" subtree "$verb" -q --prefix="$dest" --squash \
+  if [ -d "$root/$dest" ]; then
+    git -C "$root" rm -rq "$dest"
+    git -C "$root" commit -qm "Remove $dest before re-vendoring"
+  fi
+  git -C "$root" subtree add -q --prefix="$dest" --squash \
     -m "Vendor $repo $src at $ref ($sha)" FETCH_HEAD
   echo "$dest <- $repo $src @ $ref ($sha)"
 }
