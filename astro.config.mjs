@@ -2,6 +2,6 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://ilmeskio.github.io",
+  site: "https://consiglio.fyi",
   trailingSlash: "always",
 });
