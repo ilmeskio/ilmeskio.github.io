@@ -1,0 +1,216 @@
+---
+// The CV in the classic Europass layout: one two-column table, labels on the
+// left (right-aligned), content on the right. Rendered from the same data as /cv/.
+import {
+  community,
+  education,
+  experience,
+  languages,
+  profile,
+  projects,
+  skills,
+  t,
+  type Lang,
+} from "../data/cv";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const l = (en: string, it: string) => t(en, it)[lang];
+
+const eqfLevel: Record<string, string> = { "2015": "7", "2012": "6" };
+const native = languages.find((x) => x.level.en === "native");
+const others = languages.filter((x) => x.level.en !== "native");
+
+const roles = experience.flatMap((job) =>
+  job.roles.map((role) => ({
+    period: role.period[lang],
+    title: role.title[lang],
+    employer: job.company === "Freelance" ? l("Self-employed", "Lavoro autonomo") : job.company,
+    place: role.place?.[lang],
+    highlights: role.highlights.map((h) => h[lang]),
+    clients: (job.clients ?? [])
+      .filter((c) => !c.hidden)
+      .map((c) => ({
+        name: c.name,
+        detail: [c.role[lang], c.period?.[lang]].filter(Boolean).join(", "),
+        summary: c.summary?.[lang],
+      })),
+  })),
+);
+---
+
+<main class="europass">
+  <div class="ep-grid">
+    <div class="ep-l ep-brand">
+      <span>Curriculum vitae</span>
+      <span>Europass</span>
+    </div>
+    <div class="ep-r ep-brand-r">
+      <button type="button" class="linkish" onclick="window.print()">{l("Print / PDF", "Stampa / PDF")}</button>
+    </div>
+
+    <!-- Personal information -->
+    <h2 class="ep-l ep-h">{l("Personal information", "Informazioni personali")}</h2>
+    <div class="ep-r"></div>
+    <div class="ep-l">{l("Surname(s) / First name(s)", "Cognome(i) / Nome(i)")}</div>
+    <div class="ep-r ep-name">Consiglio Gabriele</div>
+    <div class="ep-l">{l("Address", "Indirizzo")}</div>
+    <div class="ep-r">{profile.location[lang]}</div>
+    <div class="ep-l">E-mail</div>
+    <div class="ep-r"><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
+    <div class="ep-l">{l("Website", "Sito web")}</div>
+    <div class="ep-r"><a href="https://consiglio.fyi">consiglio.fyi</a></div>
+    <div class="ep-l">LinkedIn</div>
+    <div class="ep-r"><a href={`https://www.linkedin.com/in/${profile.linkedin}/`}>linkedin.com/in/{profile.linkedin}</a></div>
+    <div class="ep-l">GitHub</div>
+    <div class="ep-r"><a href={`https://github.com/${profile.github}`}>github.com/{profile.github}</a></div>
+
+    <div class="ep-l ep-gap">{l("Desired employment / Occupational field", "Occupazione desiderata / Settore professionale")}</div>
+    <div class="ep-r ep-gap ep-strong">{profile.headline[lang]}</div>
+
+    <!-- Work experience -->
+    <h2 class="ep-l ep-h">{l("Work experience", "Esperienza professionale")}</h2>
+    <div class="ep-r"></div>
+    {
+      roles.map((r) => (
+        <>
+          <div class="ep-l ep-gap">{l("Dates", "Date")}</div>
+          <div class="ep-r ep-gap">{r.period}</div>
+          <div class="ep-l">{l("Occupation or position held", "Lavoro o posizione ricoperti")}</div>
+          <div class="ep-r ep-strong">{r.title}</div>
+          {(r.highlights.length > 0 || r.clients.length > 0) && (
+            <>
+              <div class="ep-l">{l("Main activities and responsibilities", "Principali attività e responsabilità")}</div>
+              <div class="ep-r">
+                <ul>
+                  {r.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                  {r.clients.map((c) => (
+                    <li>
+                      <strong>{c.name}</strong> ({c.detail}){c.summary && <>: {c.summary}</>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
+          <div class="ep-l">{l("Name and address of employer", "Nome e indirizzo del datore di lavoro")}</div>
+          <div class="ep-r">
+            {r.employer}
+            {r.place && <>, {r.place}</>}
+          </div>
+        </>
+      ))
+    }
+
+    <!-- Education and training -->
+    <h2 class="ep-l ep-h">{l("Education and training", "Istruzione e formazione")}</h2>
+    <div class="ep-r"></div>
+    {
+      education.map((e) => (
+        <>
+          <div class="ep-l ep-gap">{l("Dates", "Date")}</div>
+          <div class="ep-r ep-gap">{e.year}</div>
+          <div class="ep-l">{l("Title of qualification awarded", "Titolo della qualifica rilasciata")}</div>
+          <div class="ep-r ep-strong">{e.degree[lang]}</div>
+          <div class="ep-l">{l("Name and type of organisation", "Nome e tipo d'organizzazione erogatrice")}</div>
+          <div class="ep-r">{e.school}</div>
+          {eqfLevel[e.year] && (
+            <>
+              <div class="ep-l">{l("Level in national or international classification", "Livello nella classificazione nazionale o internazionale")}</div>
+              <div class="ep-r">EQF {eqfLevel[e.year]}</div>
+            </>
+          )}
+        </>
+      ))
+    }
+
+    <!-- Personal skills -->
+    <h2 class="ep-l ep-h">{l("Personal skills and competences", "Capacità e competenze personali")}</h2>
+    <div class="ep-r"></div>
+    <div class="ep-l ep-gap">{l("Mother tongue(s)", "Madrelingua(e)")}</div>
+    <div class="ep-r ep-gap ep-strong">{native?.name[lang]}</div>
+    <div class="ep-l">{l("Other language(s)", "Altra(e) lingua(e)")}</div>
+    <div class="ep-r ep-strong">{others.map((o) => o.name[lang]).join(", ")}</div>
+    <div class="ep-l">{l("Self-assessment", "Autovalutazione")}</div>
+    <div class="ep-r">
+      <table class="ep-langs">
+        <thead>
+          <tr>
+            <th rowspan="2">{l("European level", "Livello europeo")} (*)</th>
+            <th colspan="2">{l("Understanding", "Comprensione")}</th>
+            <th colspan="2">{l("Speaking", "Parlato")}</th>
+            <th rowspan="2">{l("Writing", "Scritto")}</th>
+          </tr>
+          <tr>
+            <th>{l("Listening", "Ascolto")}</th>
+            <th>{l("Reading", "Lettura")}</th>
+            <th>{l("Spoken interaction", "Interazione orale")}</th>
+            <th>{l("Spoken production", "Produzione orale")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            others.map((o) => (
+              <tr>
+                <th>{o.name[lang]}</th>
+                {[1, 2, 3, 4, 5].map(() => (
+                  <td>{o.level[lang]}</td>
+                ))}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      <p class="ep-note">
+        (*){" "}
+        {l(
+          "Common European Framework of Reference for Languages: A1–A2 basic user, B1–B2 independent user, C1–C2 proficient user.",
+          "Quadro comune europeo di riferimento per le lingue: A1–A2 utente base, B1–B2 utente autonomo, C1–C2 utente avanzato.",
+        )}
+      </p>
+    </div>
+
+    {
+      skills.map((g, i) => (
+        <>
+          <div class:list={["ep-l", { "ep-gap": i === 0 }]}>{i === 0 ? l("Computer skills and competences", "Capacità e competenze informatiche") : ""}</div>
+          <div class:list={["ep-r", { "ep-gap": i === 0 }]}>
+            <em>{g.group[lang]}:</em> {g.items.join(", ")}
+          </div>
+        </>
+      ))
+    }
+
+    <!-- Additional information -->
+    <h2 class="ep-l ep-h">{l("Additional information", "Ulteriori informazioni")}</h2>
+    <div class="ep-r"></div>
+    {
+      projects.map((p) => (
+        <>
+          <div class="ep-l ep-gap">{l("Projects", "Progetti")}</div>
+          <div class="ep-r ep-gap">
+            <a href={p.url} class="ep-strong">
+              {p.name}
+            </a>{" "}
+            ({p.period[lang]}). {p.summary[lang]}
+          </div>
+        </>
+      ))
+    }
+    {
+      community.map((c) => (
+        <>
+          <div class="ep-l ep-gap">{l("Community", "Community")}</div>
+          <div class="ep-r ep-gap">
+            <span class="ep-strong">{c.name}</span>, {c.role[lang]} ({c.period[lang]}). {c.summary[lang]}
+          </div>
+        </>
+      ))
+    }
+  </div>
+</main>

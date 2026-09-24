@@ -1,12 +1,12 @@
-/* consiglio.fyi — one stylesheet for the CV and the app pages. */
+/* consiglio.fyi — one stylesheet for every page. */
 
 :root {
-  --bg: #f6f3ee;
-  --surface: #fffdf9;
-  --ink: #1b1a17;
-  --muted: #6b665d;
-  --rule: #ddd6ca;
-  --accent: #b4441f;
+  --bg: #ffffff;
+  --surface: #f6f7f9;
+  --ink: #16181d;
+  --muted: #6b7079;
+  --rule: #e8e9ec;
+  --accent: #2f4fbf;
   --accent-ink: #ffffff;
 
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
@@ -18,13 +18,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #151412;
-    --surface: #1d1b18;
-    --ink: #ece7df;
-    --muted: #a39d92;
-    --rule: #34302a;
-    --accent: #f08a5d;
-    --accent-ink: #151412;
+    --bg: #121316;
+    --surface: #1a1b1f;
+    --ink: #e8e8ea;
+    --muted: #9a9ea8;
+    --rule: #2c2e34;
+    --accent: #8ea6ff;
+    --accent-ink: #121316;
   }
 }
 
@@ -472,6 +472,217 @@ a:hover {
   list-style: none;
 }
 
+/* ---------- home ---------- */
+
+.home {
+  max-width: 38rem;
+  padding: clamp(3rem, 12vw, 7rem) 0 2rem;
+  font-size: 1.05rem;
+}
+
+.home-intro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.home h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.home-meta {
+  margin: 0.15rem 0 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.manifesto {
+  margin: 2.5rem 0 0;
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.list {
+  margin-top: 3rem;
+}
+
+.list h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  display: grid;
+  grid-template-columns: 9rem 1fr auto;
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.list-name {
+  font-weight: 500;
+}
+
+.list-name a {
+  text-decoration: none;
+}
+
+.list-name a span {
+  color: var(--accent);
+}
+
+.list-note {
+  color: var(--muted);
+}
+
+.list-when {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.list ul.list-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.list ul.list-inline li {
+  display: block;
+  padding: 0;
+  border: 0;
+}
+
+/* ---------- Europass CV (classic two-column table) ---------- */
+
+.europass {
+  padding: clamp(2rem, 6vw, 3.5rem) 0 2rem;
+  font-family: "Arial Narrow", Arial, "Helvetica Neue", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.ep-grid {
+  display: grid;
+  grid-template-columns: minmax(9rem, 32%) 1fr;
+}
+
+.ep-l {
+  margin: 0;
+  padding: 0.15rem 0.9rem 0.15rem 0;
+  border-right: 1px solid var(--ink);
+  text-align: right;
+  color: var(--muted);
+}
+
+.ep-r {
+  margin: 0;
+  padding: 0.15rem 0 0.15rem 0.9rem;
+}
+
+.ep-gap {
+  padding-top: 0.9rem;
+}
+
+.ep-h {
+  padding-top: 1.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.ep-brand {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+.ep-brand-r {
+  display: flex;
+  align-items: flex-end;
+}
+
+.ep-brand-r .linkish {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+.ep-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.ep-strong {
+  font-weight: 700;
+}
+
+.ep-r ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.ep-r li + li {
+  margin-top: 0.2rem;
+}
+
+.ep-langs {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.ep-langs th,
+.ep-langs td {
+  padding: 0.25rem 0.4rem;
+  border: 1px solid var(--rule);
+  text-align: center;
+}
+
+.ep-langs thead th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.ep-langs tbody th {
+  text-align: left;
+}
+
+.ep-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 /* ---------- prose pages (app, privacy, terms) ---------- */
 
 .prose {
@@ -569,9 +780,47 @@ a:hover {
   gap: 1rem;
 }
 
+/* ---------- screen / print variants ---------- */
+
+.print-only {
+  display: none;
+}
+
 /* ---------- small screens ---------- */
 
 @media (max-width: 40rem) {
+  .ep-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-l {
+    padding-right: 0;
+    border-right: 0;
+    text-align: left;
+  }
+
+  .ep-r {
+    padding-left: 0;
+  }
+
+  .ep-r:empty {
+    display: none;
+  }
+
+  .ep-langs {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .list li {
+    grid-template-columns: 1fr auto;
+  }
+
+  .list-note {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
   .section {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -599,29 +848,216 @@ a:hover {
 }
 
 @media print {
-  .topbar,
-  .footer,
-  .linkish {
-    display: none;
+  /* The CV prints on a single A4 page: smaller type, compact sections,
+     client summaries and the highlights band left out. */
+  @page {
+    size: A4;
+    margin: 10mm 12mm;
   }
 
-  .section > h2 {
-    position: static;
-  }
-
-  .job,
-  .client {
-    break-inside: avoid;
+  html {
+    font-size: 7.4pt;
   }
 
   body {
     background: #fff;
     color: #000;
-    font-size: 11pt;
+    line-height: 1.32;
   }
 
+  .wrap {
+    max-width: none;
+    padding: 0;
+  }
+
+  .topbar,
+  .footer,
+  .linkish,
   .highlights,
-  .role {
+  .client-summary,
+  .screen-only {
+    display: none;
+  }
+
+  .print-only {
+    display: inline;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .hero {
+    padding: 0 0 0.8rem;
+  }
+
+  .portrait {
+    width: 5.5rem;
+    margin: 0 0 0 1rem;
+    box-shadow: none;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 0.3rem;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .hero .headline {
+    margin-top: 0.3rem;
+    font-size: 1.25rem;
+  }
+
+  .hero .summary {
+    max-width: none;
+    margin-top: 0.6rem;
+    font-size: 1.05rem;
+  }
+
+  .contacts {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .button {
+    padding: 0;
+    background: none;
+    color: var(--ink);
+  }
+
+  .section {
+    grid-template-columns: 7rem 1fr;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    break-inside: avoid;
+  }
+
+  .section > h2 {
+    position: static;
+    margin-top: 0.15rem;
+  }
+
+  .job + .job {
+    margin-top: 0.7rem;
+  }
+
+  .company {
+    font-size: 1.2rem;
+  }
+
+  .about {
+    display: none;
+  }
+
+  .roles {
+    margin-top: 0.3rem;
+  }
+
+  .role + .role {
+    margin-top: 0.4rem;
+  }
+
+  .role h4 {
+    display: inline;
+    font-size: 1.05rem;
+  }
+
+  .role .meta {
+    display: inline;
+    margin-left: 0.5rem;
+  }
+
+  .role ul {
+    margin-top: 0.15rem;
+  }
+
+  .role li + li {
+    margin-top: 0.05rem;
+  }
+
+  .clients-label {
+    margin: 0.5rem 0 0.3rem;
+  }
+
+  .clients {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.2rem 1rem;
+  }
+
+  .client {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .client-name {
+    font-size: 1rem;
+  }
+
+  .entry + .entry {
+    margin-top: 0.4rem;
+  }
+
+  .entry h3 {
+    font-size: 1.05rem;
+  }
+
+  .entry p,
+  .entry ul {
+    margin-top: 0.15rem;
+  }
+
+  .skill-groups {
+    gap: 0.25rem;
+  }
+
+  .skill-groups > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.5rem;
+    align-items: baseline;
+  }
+
+  .skill-group {
+    margin: 0;
+  }
+
+  .skill-group::after {
+    content: ":";
+  }
+
+  .tags {
+    display: inline;
+    font-family: var(--serif);
+    font-size: 1rem;
+  }
+
+  .tags li {
+    display: inline;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .tags li:not(:last-child)::after {
+    content: ", ";
+  }
+
+  .europass {
+    padding: 0;
+  }
+
+  .europass {
+    font-size: 1.2rem;
+  }
+
+  .ep-langs {
     break-inside: avoid;
   }
 }

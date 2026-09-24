@@ -1,0 +1,25 @@
+---
+// Layout for the CV in the Europass format: /cv/europass/ (EN) and /it/cv/europass/ (IT).
+import Base from "./Base.astro";
+import Europass from "../components/Europass.astro";
+import LangNav from "../components/LangNav.astro";
+import { profile, type Lang } from "../data/cv";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const paths = { en: "/cv/europass/", it: "/it/cv/europass/" };
+const home = lang === "en" ? "/" : "/it/";
+const description = {
+  en: `${profile.name} — CV in the Europass format.`,
+  it: `${profile.name} — CV in formato Europass.`,
+}[lang];
+---
+
+<Base title={`CV Europass — ${profile.name}`} description={description} lang={lang} alternates={paths} home={home}>
+  <LangNav slot="nav" lang={lang} {...paths} />
+
+  <Europass lang={lang} />
+</Base>

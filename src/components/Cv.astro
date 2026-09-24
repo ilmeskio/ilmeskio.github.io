@@ -31,9 +31,19 @@ const { lang } = Astro.props;
     <p class="summary">{profile.summary[lang]}</p>
     <ul class="contacts">
       <li><a class="button" href={`mailto:${profile.email}`}>{profile.email}</a></li>
-      <li><a href={`https://github.com/${profile.github}`}>GitHub</a></li>
-      <li><a href={`https://www.linkedin.com/in/${profile.linkedin}/`}>LinkedIn</a></li>
+      <li class="print-only">consiglio.fyi</li>
+      <li>
+        <a href={`https://github.com/${profile.github}`}>
+          <span class="screen-only">GitHub</span><span class="print-only">github.com/{profile.github}</span>
+        </a>
+      </li>
+      <li>
+        <a href={`https://www.linkedin.com/in/${profile.linkedin}/`}>
+          <span class="screen-only">LinkedIn</span><span class="print-only">linkedin.com/in/{profile.linkedin}</span>
+        </a>
+      </li>
       <li><button type="button" class="linkish" onclick="window.print()">{labels.print[lang]}</button></li>
+      <li class="screen-only"><a href={lang === "en" ? "/cv/europass/" : "/it/cv/europass/"}>{labels.europass[lang]}</a></li>
     </ul>
   </section>
 
@@ -101,7 +111,7 @@ const { lang } = Astro.props;
               <>
                 <p class="clients-label">{labels.clients[lang]}</p>
                 <ul class="clients">
-                  {job.clients.map((c) => (
+                  {job.clients.filter((c) => !c.hidden).map((c) => (
                     <li class="client">
                       <span class="client-name">{c.url ? <a href={c.url}>{c.name}</a> : c.name}</span>
                       <span class="client-role">{c.role[lang]}</span>

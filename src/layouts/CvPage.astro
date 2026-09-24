@@ -1,7 +1,8 @@
 ---
-// Layout for the two CV translations: / (EN) and /it/ (IT).
+// Layout for the full CV: /cv/ (EN) and /it/cv/ (IT).
 import Base from "./Base.astro";
 import Cv from "../components/Cv.astro";
+import LangNav from "../components/LangNav.astro";
 import { profile, type Lang } from "../data/cv";
 
 interface Props {
@@ -9,18 +10,16 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const paths = { en: "/cv/", it: "/it/cv/" };
 const home = lang === "en" ? "/" : "/it/";
 const description = {
-  en: `${profile.name} — ${profile.headline.en}. CV and contacts.`,
-  it: `${profile.name} — ${profile.headline.it}. CV e contatti.`,
+  en: `${profile.name} — ${profile.headline.en}. Full CV.`,
+  it: `${profile.name} — ${profile.headline.it}. CV completo.`,
 }[lang];
 ---
 
-<Base title={profile.name} description={description} lang={lang} cvAlternates home={home}>
-  <nav slot="nav" aria-label={lang === "en" ? "Language" : "Lingua"}>
-    <a href="/" hreflang="en" aria-current={lang === "en" ? "true" : undefined}>EN</a>
-    <a href="/it/" hreflang="it" aria-current={lang === "it" ? "true" : undefined}>IT</a>
-  </nav>
+<Base title={`CV — ${profile.name}`} description={description} lang={lang} alternates={paths} home={home}>
+  <LangNav slot="nav" lang={lang} {...paths} />
 
   <Cv lang={lang} />
 </Base>
