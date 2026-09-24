@@ -8,11 +8,11 @@ The zone `consiglio.fyi` is hosted on Cloudflare and described with OpenTofu in 
 |---|---|---|
 | `consiglio.fyi` A ×4, AAAA ×4 | GitHub Pages addresses | The site |
 | `www` CNAME | `ilmeskio.github.io` | The site, `www` variant |
-| MX, SPF TXT | Fastmail | Email |
+| MX ×2, SPF TXT, DKIM CNAME ×3 (`fm1`–`fm3._domainkey`) | Fastmail | Email |
 
 Every record is **DNS only**: GitHub Pages issues the HTTPS certificate itself and cannot do it behind the Cloudflare proxy.
 
-The Fastmail records exist in the zone and are not yet in the code. The `existing_records` output of a plan lists them with their IDs, to bring them under management with `import` blocks.
+The Fastmail records (`infra/dns/mail.tf`) predate the stack and were brought under management with `import` blocks, keeping the "fastmail configuration" comment Cloudflare set on them.
 
 ## How a change is applied
 
