@@ -61,3 +61,18 @@ resource "cloudflare_dns_record" "github_pages_challenge" {
   content = "\"81c0eeac79bb87f3d6942f3bb53a6f\""
   ttl     = 1
 }
+
+# Google Search Console domain property for consiglio.fyi. Created by the
+# Search Console setup wizard through Cloudflare, then imported here.
+resource "cloudflare_dns_record" "google_site_verification" {
+  zone_id = var.zone_id
+  name    = local.zone
+  type    = "TXT"
+  content = "\"google-site-verification=NbF8RGF5ehys1HJxIvRTbQ3IOVTfQ3F9XOgB1ebfDkw\""
+  ttl     = 3600
+}
+
+import {
+  to = cloudflare_dns_record.google_site_verification
+  id = "${var.zone_id}/fedf7f9066cedd3491c5e5743b1c56c8"
+}
