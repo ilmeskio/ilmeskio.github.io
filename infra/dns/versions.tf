@@ -8,7 +8,7 @@ terraform {
     }
   }
 
-  # State lives in Scalr (workspace consiglio-fyi-dns). Runs are VCS-driven:
+  # State lives in Scalr (workspace consiglio-fyi). Runs are VCS-driven:
   # plan on every pull request touching infra/dns, apply after merge to main.
   # A local `tofu plan` also runs on Scalr, after `tofu login ilmeskio.scalr.io`.
   backend "remote" {
@@ -16,7 +16,7 @@ terraform {
     organization = "env-v0pe3dh26jlaehv0c"
 
     workspaces {
-      name = "consiglio-fyi-dns"
+      name = "consiglio-fyi"
     }
   }
 }

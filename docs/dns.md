@@ -1,6 +1,6 @@
 # DNS for consiglio.fyi
 
-The zone `consiglio.fyi` is hosted on Cloudflare and described with OpenTofu in `infra/dns/`. The state lives in Scalr, workspace `consiglio-fyi-dns` of the environment `env-v0pe3dh26jlaehv0c` on `ilmeskio.scalr.io`.
+The zone `consiglio.fyi` is hosted on Cloudflare and described with OpenTofu in `infra/dns/`. The state lives in Scalr, workspace `consiglio-fyi` of the environment `env-v0pe3dh26jlaehv0c` on `ilmeskio.scalr.io`.
 
 ## What the zone contains
 
