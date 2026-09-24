@@ -7,14 +7,14 @@ interface Props {
   title: string;
   description: string;
   lang?: "en" | "it";
-  /** Emit hreflang alternates for the two CV translations. */
-  cvAlternates?: boolean;
+  /** Paths of the English and Italian versions of this page, emitted as hreflang alternates. */
+  alternates?: { en: string; it: string };
   /** Target and text of the top-left link. */
   home?: string;
   brand?: string;
 }
 
-const { title, description, lang = "en", cvAlternates = false, home = "/", brand = "consiglio.fyi" } = Astro.props;
+const { title, description, lang = "en", alternates, home = "/", brand = "consiglio.fyi" } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,10 +26,10 @@ const { title, description, lang = "en", cvAlternates = false, home = "/", brand
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     {
-      cvAlternates && (
+      alternates && (
         <>
-          <link rel="alternate" hreflang="en" href={new URL("/", Astro.site)} />
-          <link rel="alternate" hreflang="it" href={new URL("/it/", Astro.site)} />
+          <link rel="alternate" hreflang="en" href={new URL(alternates.en, Astro.site)} />
+          <link rel="alternate" hreflang="it" href={new URL(alternates.it, Astro.site)} />
         </>
       )
     }

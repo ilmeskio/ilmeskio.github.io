@@ -4,15 +4,16 @@ Personal site of Gabriele Consiglio, built with [Astro](https://astro.build) and
 
 | Path | Page |
 |---|---|
-| `/` | CV (English) |
-| `/it/` | CV (Italian) |
+| `/`, `/it/` | Home: manifesto and short lists (now, projects, clients, before, contact) |
+| `/cv/`, `/it/cv/` | Full CV; prints on one A4 page |
+| `/cv/europass/`, `/it/cv/europass/` | The same CV in the Europass layout |
 | `/claude-mcp/` | Home page of the `claude-mcp` Google OAuth app |
 | `/claude-mcp/privacy/` | Its privacy policy |
 | `/claude-mcp/terms/` | Its terms of service |
 
-The `claude-mcp` pages are not linked from the CV, and they do not link back to it.
+The `claude-mcp` pages are not linked from the personal pages, and they do not link back to them.
 
-The CV content lives in `src/data/cv.ts`, with every text in both languages; both CV pages render from it.
+Content lives in `src/data/home.ts` (home) and `src/data/cv.ts` (CV), with every text in both languages.
 
 ## Develop
 

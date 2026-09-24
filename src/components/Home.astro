@@ -1,0 +1,66 @@
+---
+// The home page: name, manifesto, then short lists (one line per item).
+import { photo, profile, type Lang } from "../data/cv";
+import { home, type Item } from "../data/home";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const cvPath = lang === "en" ? "/cv/" : "/it/cv/";
+
+const sections: { id: string; label: string; items: Item[] }[] = [
+  { id: "now", label: home.labels.now[lang], items: home.now },
+  { id: "clients", label: home.labels.clients[lang], items: home.clients },
+  { id: "before", label: home.labels.before[lang], items: home.before },
+];
+---
+
+<main class="home">
+  <header class="home-intro">
+    <img class="avatar" src={photo.src} alt={photo.alt[lang]} width="480" height="480" />
+    <div>
+      <h1>{profile.name}</h1>
+      <p class="home-meta">{profile.headline[lang]} · {profile.location[lang]}</p>
+    </div>
+  </header>
+
+  <p class="manifesto">{home.manifesto[lang]}</p>
+
+  {
+    sections.map((s) => (
+      <section class="list" aria-labelledby={s.id}>
+        <h2 id={s.id}>{s.label}</h2>
+        <ul>
+          {s.items.filter((i) => !i.hidden).map((i) => (
+            <li>
+              <span class="list-name">
+                {i.url ? (
+                  <a href={i.url}>
+                    {i.name}
+                    <span aria-hidden="true"> ↗</span>
+                  </a>
+                ) : (
+                  i.name
+                )}
+              </span>
+              <span class="list-note">{i.note[lang]}</span>
+              {i.when && <span class="list-when">{i.when[lang]}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+
+  <section class="list" aria-labelledby="contact">
+    <h2 id="contact">{home.labels.contact[lang]}</h2>
+    <ul class="list-inline">
+      <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+      <li><a href={`https://github.com/${profile.github}`}>GitHub</a></li>
+      <li><a href={`https://www.linkedin.com/in/${profile.linkedin}/`}>LinkedIn</a></li>
+      <li><a href={cvPath}>{home.labels.cv[lang]} →</a></li>
+    </ul>
+  </section>
+</main>

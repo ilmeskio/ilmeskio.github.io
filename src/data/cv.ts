@@ -5,6 +5,8 @@
 export type Lang = "en" | "it";
 export type Text = Record<Lang, string>;
 
+export const t = (en: string, it: string): Text => ({ en, it });
+
 export interface Role {
   title: Text;
   period: Text;
@@ -14,6 +16,8 @@ export interface Role {
 
 export interface Client {
   name: string;
+  /** Kept in the data but not shown anywhere. */
+  hidden?: boolean;
   url?: string;
   role: Text;
   period?: Text;
@@ -28,15 +32,14 @@ export interface Job {
   clients?: Client[];
 }
 
-const t = (en: string, it: string): Text => ({ en, it });
 
 export const profile = {
   name: "Gabriele Consiglio",
   headline: t("Freelance product engineer", "Product engineer freelance"),
   location: t("Milan, Italy", "Milano"),
   summary: t(
-    "I'm a product engineer: a former CTO and product manager who has been building web applications for more than ten years. I bring AI into teams as a shared tool: product, design and engineering work in the same flow, together with the agents the team coordinates. A shared language and clear practices let the team move fast without losing quality, with each person working where they are strongest and everyone aligned with the business goals. I'm gathering this way of working in Lunette, my open-source project.",
-    "Sono un product engineer: ex CTO e product manager, costruisco applicazioni web da più di dieci anni. Porto l'AI nei team come strumento condiviso: prodotto, design e sviluppo lavorano nello stesso flusso, insieme agli agenti che il team coordina. Un linguaggio comune e pratiche chiare permettono al team di andare veloce senza perdere qualità, con ognuno dove rende meglio e tutti allineati agli obiettivi di business. Sto raccogliendo questo modo di lavorare in Lunette, il mio progetto open source.",
+    "I'm a product engineer with experience as CTO and product manager, and I have been building web applications for more than ten years. I bring AI into teams as a shared tool: product, design and engineering work in the same flow, together with the agents the team coordinates. A shared language and clear practices let the team move fast without losing quality, with each person working where they are strongest and everyone aligned with the business goals. I study this way of working in Lunette, my open-source project.",
+    "Sono un product engineer con esperienza da CTO e product manager, e costruisco applicazioni web da più di dieci anni. Porto l'AI nei team come strumento condiviso: prodotto, design e sviluppo lavorano nello stesso flusso, insieme agli agenti che il team coordina. Un linguaggio comune e pratiche chiare permettono al team di andare veloce senza perdere qualità, con ognuno dove rende meglio e tutti allineati agli obiettivi di business. Studio questo modo di lavorare in Lunette, il mio progetto open source.",
   ),
   email: "gabriele@consiglio.fyi",
   github: "ilmeskio",
@@ -81,7 +84,7 @@ export const experience: Job[] = [
     company: "Freelance",
     roles: [
       {
-        title: t("Software Developer & Consultant", "Sviluppatore software e consulente"),
+        title: t("Product Engineer", "Product Engineer"),
         period: t("Jan 2025 – present", "gen 2025 – oggi"),
         place: t("Hybrid", "Ibrido"),
         highlights: [
@@ -102,17 +105,17 @@ export const experience: Job[] = [
         role: t("Product Engineer", "Product Engineer"),
         period: t("Mar 2026 – present", "mar 2026 – oggi"),
         summary: t(
-          "Rewrite of an association's legacy PHP intranet as a TypeScript monorepo, on the Lunette starter and agentic workflow: encrypted personal data, member area, design system with visual tests, headless CMS.",
-          "Riscrittura dell'intranet PHP di un'associazione in un monorepo TypeScript, sullo starter e sul flusso agentico di Lunette: dati personali cifrati, area soci, design system con test visuali, CMS headless.",
+          "Rewrite of an association's legacy PHP intranet as a TypeScript monorepo, on the Lunette starter and its agentic workflow: encrypted personal data, member area, design system with visual tests, headless CMS.",
+          "Riscrittura dell'intranet PHP di un'associazione in un monorepo TypeScript, su Lunette starter e il suo flusso agentico: dati personali cifrati, area soci, design system con test visuali, CMS headless.",
         ),
       },
       {
         name: "Discentis",
-        role: t("Product Engineer", "Product Engineer"),
+        role: t("CTO & Product Engineer", "CTO e Product Engineer"),
         period: t("Feb 2025 – present", "feb 2025 – oggi"),
         summary: t(
-          "Sole engineer of an international community of teachers. From a first platform (OAuth accounts, self-hosted Moodle, GCP infrastructure as code) to a TypeScript monorepo with forum, resources, events and posts translated automatically into four languages. Built with the Lunette agentic workflow.",
-          "Unico ingegnere di una community internazionale di insegnanti. Da una prima piattaforma (account OAuth, Moodle self-hosted, infrastruttura GCP as code) a un monorepo TypeScript con forum, risorse, eventi e post tradotti automaticamente in quattro lingue. Sviluppata con il flusso agentico di Lunette.",
+          "Sole engineer of an international community of teachers. From a first platform (OAuth accounts, self-hosted Moodle, GCP infrastructure as code) to a TypeScript monorepo with forum, resources, events and posts translated automatically into four languages. Built with the Lunette starter agentic workflow.",
+          "Unico ingegnere di una community internazionale di insegnanti. Da una prima piattaforma (account OAuth, Moodle self-hosted, infrastruttura GCP as code) a un monorepo TypeScript con forum, risorse, eventi e post tradotti automaticamente in quattro lingue. Sviluppata con il flusso agentico di Lunette starter.",
         ),
       },
       {
@@ -126,6 +129,7 @@ export const experience: Job[] = [
       },
       {
         name: "Tomura",
+        hidden: true,
         role: t("Product Engineer", "Product Engineer"),
         period: t("Jun 2026", "giu 2026"),
         summary: t(
@@ -229,11 +233,11 @@ export const experience: Job[] = [
 export const projects: { name: string; url: string; period: Text; summary: Text }[] = [
   {
     name: "Lunette",
-    url: "https://github.com/LunetteOrg/lunette",
+    url: "https://github.com/LunetteOrg",
     period: t("2026 – present", "2026 – oggi"),
     summary: t(
-      "My open-source toolkit for building products with a team of AI agents, grown out of Discentis and WAI. The method: a five-persona review panel (architecture, backend, design system, QA, release) run as a round table; scripted sprints in which each story goes through TDD, adversarial review and fixes; retrospectives, collected from commit trailers, that turn lessons into new skills, hooks and ADRs. The code: a library for typed dependency wiring as a chain of layers (Effect-grade composition with plain functions), a TypeScript monorepo starter and the @lntt/create CLI.",
-      "Il mio toolkit open source per costruire prodotti con un team di agenti AI, nato da Discentis e WAI. Il metodo: un panel di revisione con cinque persona (architettura, backend, design system, QA, rilascio) che lavora come una tavola rotonda; sprint scriptati in cui ogni storia passa per TDD, revisione avversariale e correzioni; retrospettive, raccolte dai trailer dei commit, che trasformano le lezioni in nuove skill, hook e ADR. Il codice: una libreria per comporre le dipendenze come catena di layer (la composizione di Effect con funzioni semplici), uno starter per monorepo TypeScript e la CLI @lntt/create.",
+      "An open study of how development and configuration practices help the whole team — product, design, engineering — work with AI. It includes a TypeScript monorepo starter with the agent setup I use on Discentis and WAI.",
+      "Uno studio aperto su come pratiche di sviluppo e di configurazione aiutano tutto il team — prodotto, design, sviluppo — a lavorare con l'AI. Comprende uno starter per monorepo TypeScript con la configurazione degli agenti che uso in Discentis e WAI.",
     ),
   },
 ];
@@ -242,10 +246,10 @@ export const community = [
   {
     name: "Product Personas",
     role: t("Co-founder", "Co-fondatore"),
-    period: t("2021 – present", "2021 – oggi"),
+    period: t("2021 – 2025", "2021 – 2025"),
     summary: t(
-      "A product meetup where practitioners review industry trends, technical strategies and design choices.",
-      "Un meetup di prodotto in cui professionisti discutono tendenze del settore, strategie tecniche e scelte di design.",
+      "A product meetup where practitioners reviewed industry trends, technical strategies and design choices.",
+      "Un meetup di prodotto in cui professionisti discutevano tendenze del settore, strategie tecniche e scelte di design.",
     ),
   },
 ];
@@ -298,4 +302,5 @@ export const labels = {
   languages: t("Languages", "Lingue"),
   contact: t("Get in touch", "Contatti"),
   print: t("Print / PDF", "Stampa / PDF"),
+  europass: t("Europass format", "Formato Europass"),
 };

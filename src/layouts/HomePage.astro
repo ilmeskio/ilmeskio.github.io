@@ -1,0 +1,22 @@
+---
+// Layout for the home page: / (EN) and /it/ (IT).
+import Base from "./Base.astro";
+import Home from "../components/Home.astro";
+import LangNav from "../components/LangNav.astro";
+import { profile, type Lang } from "../data/cv";
+import { home } from "../data/home";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const paths = { en: "/", it: "/it/" };
+const description = `${profile.name} — ${profile.headline[lang]}. ${home.manifesto[lang]}`;
+---
+
+<Base title={profile.name} description={description} lang={lang} alternates={paths} home={paths[lang]}>
+  <LangNav slot="nav" lang={lang} {...paths} />
+
+  <Home lang={lang} />
+</Base>

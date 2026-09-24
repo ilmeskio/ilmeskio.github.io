@@ -1,0 +1,17 @@
+---
+// EN/IT switch for the top bar: links to the two versions of the current page.
+import type { Lang } from "../data/cv";
+
+interface Props {
+  lang: Lang;
+  en: string;
+  it: string;
+}
+
+const { lang, en, it } = Astro.props;
+---
+
+<nav aria-label={lang === "en" ? "Language" : "Lingua"}>
+  <a href={en} hreflang="en" aria-current={lang === "en" ? "true" : undefined}>EN</a>
+  <a href={it} hreflang="it" aria-current={lang === "it" ? "true" : undefined}>IT</a>
+</nav>
