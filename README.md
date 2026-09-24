@@ -1,6 +1,6 @@
 # consiglio.fyi
 
-Personal site of Gabriele Consiglio, built with [Astro](https://astro.build) and served by GitHub Pages at <https://ilmeskio.github.io>. The custom domain (`consiglio.fyi`, via a `CNAME` file) is not wired up yet — see issue #1.
+Personal site of Gabriele Consiglio, built with [Astro](https://astro.build) and served by GitHub Pages at <https://consiglio.fyi>. The domain's DNS is described in `infra/dns/` (see `docs/dns.md`).
 
 | Path | Page |
 |---|---|
