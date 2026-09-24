@@ -9,11 +9,14 @@ The zone `consiglio.fyi` is hosted on Cloudflare and described with OpenTofu in 
 | `consiglio.fyi` A ×4, AAAA ×4 | GitHub Pages addresses | The site |
 | `www` CNAME | `ilmeskio.github.io` | The site, `www` variant |
 | `_github-pages-challenge-ilmeskio` TXT | GitHub | Domain verification for the ilmeskio account |
+| `consiglio.fyi` TXT `google-site-verification=…` | Google | Search Console domain property |
 | MX ×2, SPF TXT, DKIM CNAME ×3 (`fm1`–`fm3._domainkey`) | Fastmail | Email |
 
 Every record is **DNS only**: GitHub Pages issues the HTTPS certificate itself and cannot do it behind the Cloudflare proxy.
 
-The Fastmail records (`infra/dns/mail.tf`) predate the stack and were brought under management with `import` blocks, keeping the "fastmail configuration" comment Cloudflare set on them.
+The Fastmail records (`infra/dns/mail.tf`) predate the stack and were brought under management with `import` blocks, keeping the "fastmail configuration" comment Cloudflare set on them. The Google verification record was created by the Search Console wizard and imported the same way.
+
+A record created from the Cloudflare dashboard or by a setup wizard is not deleted by OpenTofu, but it stays outside the code until it is imported.
 
 ## How a change is applied
 
