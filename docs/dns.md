@@ -8,6 +8,7 @@ The zone `consiglio.fyi` is hosted on Cloudflare and described with OpenTofu in 
 |---|---|---|
 | `consiglio.fyi` A ×4, AAAA ×4 | GitHub Pages addresses | The site |
 | `www` CNAME | `ilmeskio.github.io` | The site, `www` variant |
+| `_github-pages-challenge-ilmeskio` TXT | GitHub | Domain verification for the ilmeskio account |
 | MX ×2, SPF TXT, DKIM CNAME ×3 (`fm1`–`fm3._domainkey`) | Fastmail | Email |
 
 Every record is **DNS only**: GitHub Pages issues the HTTPS certificate itself and cannot do it behind the Cloudflare proxy.

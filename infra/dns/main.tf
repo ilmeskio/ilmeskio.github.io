@@ -49,3 +49,15 @@ resource "cloudflare_dns_record" "www" {
   proxied = false
   ttl     = 1
 }
+
+# ---------- Domain verification ----------
+
+# GitHub Pages domain verification for the ilmeskio account
+# (github.com/settings/pages): stops other accounts from publishing on this domain.
+resource "cloudflare_dns_record" "github_pages_challenge" {
+  zone_id = var.zone_id
+  name    = "_github-pages-challenge-ilmeskio.${local.zone}"
+  type    = "TXT"
+  content = "\"81c0eeac79bb87f3d6942f3bb53a6f\""
+  ttl     = 1
+}
