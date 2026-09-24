@@ -4,6 +4,7 @@ import Base from "./Base.astro";
 import Home from "../components/Home.astro";
 import LangNav from "../components/LangNav.astro";
 import { profile, type Lang } from "../data/cv";
+import { likeThis } from "../data/like-this";
 import { home } from "../data/home";
 
 interface Props {
@@ -19,4 +20,8 @@ const description = `${profile.name} — ${profile.headline[lang]}. ${home.manif
   <LangNav slot="nav" lang={lang} {...paths} />
 
   <Home lang={lang} />
+
+  <nav slot="footer" aria-label={lang === "en" ? "Other pages" : "Altre pagine"}>
+    <a href={lang === "en" ? "/cv/like-this/" : "/it/cv/like-this/"}>{likeThis.link[lang]} →</a>
+  </nav>
 </Base>

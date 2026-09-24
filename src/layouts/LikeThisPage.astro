@@ -1,0 +1,54 @@
+---
+// Layout for "A CV like this": /cv/like-this/ (EN) and /it/cv/like-this/ (IT).
+// Shows the prompt that builds a CV site on the model of this one, with a copy button.
+import Base from "./Base.astro";
+import LangNav from "../components/LangNav.astro";
+import { profile, type Lang } from "../data/cv";
+import { likeThis, repo } from "../data/like-this";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const paths = { en: "/cv/like-this/", it: "/it/cv/like-this/" };
+const home = lang === "en" ? "/" : "/it/";
+const cvPath = lang === "en" ? "/cv/" : "/it/cv/";
+---
+
+<Base title={`${likeThis.title[lang]} — ${profile.name}`} description={likeThis.lede[lang]} lang={lang} alternates={paths} ogImage={`/og/${lang}.png`} home={home}>
+  <LangNav slot="nav" lang={lang} {...paths} />
+
+  <main class="prose">
+    <h1>{likeThis.title[lang]}</h1>
+    <p class="lede">{likeThis.lede[lang]}</p>
+    <p>{likeThis.how[lang]}</p>
+    <p>{likeThis.needs[lang]}</p>
+
+    <div class="prompt">
+      <div class="prompt-bar">
+        <h2 id="prompt">{likeThis.promptLabel[lang]}</h2>
+        <button type="button" class="linkish" data-copy="prompt-text" data-copied={likeThis.copied[lang]}>{likeThis.copy[lang]}</button>
+      </div>
+      <pre id="prompt-text" aria-labelledby="prompt">{likeThis.prompt[lang]}</pre>
+    </div>
+  </main>
+
+  <nav slot="footer" aria-label={lang === "en" ? "Other pages" : "Altre pagine"}>
+    <a href={cvPath}>CV</a>
+    <a href={repo}>{likeThis.source[lang]}</a>
+  </nav>
+</Base>
+
+<script>
+  // Copy the prompt; the button shows its "copied" label for two seconds.
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-copy]")) {
+    const label = button.textContent;
+    button.addEventListener("click", async () => {
+      const text = document.getElementById(button.dataset.copy!)?.textContent ?? "";
+      await navigator.clipboard.writeText(text);
+      button.textContent = button.dataset.copied ?? label;
+      setTimeout(() => (button.textContent = label), 2000);
+    });
+  }
+</script>
