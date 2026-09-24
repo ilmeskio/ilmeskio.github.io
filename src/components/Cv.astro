@@ -115,7 +115,6 @@ const { lang } = Astro.props;
                     <li class="client">
                       <span class="client-name">{c.url ? <a href={c.url}>{c.name}</a> : c.name}</span>
                       <span class="client-role">{c.role[lang]}</span>
-                      {c.period && <span class="meta">{c.period[lang]}</span>}
                       {c.summary && <span class="client-summary">{c.summary[lang]}</span>}
                     </li>
                   ))}

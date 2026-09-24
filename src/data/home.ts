@@ -22,12 +22,10 @@ export const home = {
     {
       name: "WAI",
       note: t("Rewriting an association's intranet, with Lunette starter", "Riscrittura dell'intranet di un'associazione, con Lunette starter"),
-      when: t("since 2026", "dal 2026"),
     },
     {
       name: "Discentis",
-      note: t("CTO of an international community of teachers", "CTO di una community internazionale di insegnanti"),
-      when: t("since 2025", "dal 2025"),
+      note: t("Fractional CTO of an international community of teachers", "Fractional CTO di una community internazionale di insegnanti"),
     },
     {
       name: "Lunette",
@@ -43,18 +41,15 @@ export const home = {
     {
       name: "Foorban",
       note: t("Rule-based pricing and a fleet cockpit for smart lockers", "Listino a regole e cockpit per una flotta di smart locker"),
-      when: t("2025–2026", "2025–2026"),
     },
     {
       name: "Tomura",
       hidden: true,
       note: t("Product and architecture for a conversational-BI prototype", "Prodotto e architettura per un prototipo di BI conversazionale"),
-      when: t("2026", "2026"),
     },
     {
       name: "E-One",
       note: t("New features in a legacy CRM, without regressions", "Nuove funzionalità in un CRM legacy, senza regressioni"),
-      when: t("2025", "2025"),
     },
   ] satisfies Item[],
 

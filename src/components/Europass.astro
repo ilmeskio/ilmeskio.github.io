@@ -35,7 +35,7 @@ const roles = experience.flatMap((job) =>
       .filter((c) => !c.hidden)
       .map((c) => ({
         name: c.name,
-        detail: [c.role[lang], c.period?.[lang]].filter(Boolean).join(", "),
+        detail: c.role[lang],
         summary: c.summary?.[lang],
       })),
   })),

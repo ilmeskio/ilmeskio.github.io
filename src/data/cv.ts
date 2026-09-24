@@ -1,6 +1,6 @@
 // CV content, one entry per fact, each text in both languages.
 // Where each part comes from: docs/cv-sources.md.
-// Optional fields (a client's period or summary) are left out until the facts are known.
+// Optional fields (a client's summary) are left out until the facts are known.
 
 export type Lang = "en" | "it";
 export type Text = Record<Lang, string>;
@@ -20,7 +20,6 @@ export interface Client {
   hidden?: boolean;
   url?: string;
   role: Text;
-  period?: Text;
   summary?: Text;
 }
 
@@ -103,7 +102,6 @@ export const experience: Job[] = [
       {
         name: "WAI",
         role: t("Product Engineer", "Product Engineer"),
-        period: t("Mar 2026 – present", "mar 2026 – oggi"),
         summary: t(
           "Rewrite of an association's legacy PHP intranet as a TypeScript monorepo, on the Lunette starter and its agentic workflow: encrypted personal data, member area, design system with visual tests, headless CMS.",
           "Riscrittura dell'intranet PHP di un'associazione in un monorepo TypeScript, su Lunette starter e il suo flusso agentico: dati personali cifrati, area soci, design system con test visuali, CMS headless.",
@@ -111,8 +109,7 @@ export const experience: Job[] = [
       },
       {
         name: "Discentis",
-        role: t("CTO & Product Engineer", "CTO e Product Engineer"),
-        period: t("Feb 2025 – present", "feb 2025 – oggi"),
+        role: t("Fractional CTO & Product Engineer", "Fractional CTO e Product Engineer"),
         summary: t(
           "Sole engineer of an international community of teachers. From a first platform (OAuth accounts, self-hosted Moodle, GCP infrastructure as code) to a TypeScript monorepo with forum, resources, events and posts translated automatically into four languages. Built with the Lunette starter agentic workflow.",
           "Unico ingegnere di una community internazionale di insegnanti. Da una prima piattaforma (account OAuth, Moodle self-hosted, infrastruttura GCP as code) a un monorepo TypeScript con forum, risorse, eventi e post tradotti automaticamente in quattro lingue. Sviluppata con il flusso agentico di Lunette starter.",
@@ -121,7 +118,6 @@ export const experience: Job[] = [
       {
         name: "Foorban",
         role: t("Product Engineer", "Product Engineer"),
-        period: t("Dec 2025 – Jul 2026", "dic 2025 – lug 2026"),
         summary: t(
           "Vending and smart-locker operator. Built rule-based pricing and the fleet cockpit with automatic stock transfers (NestJS, React Admin), and introduced CI, database and e2e tests, and Claude Code agent workflows.",
           "Operatore di vending e smart locker. Ho costruito il listino prezzi a regole e il cockpit della flotta con i trasferimenti automatici di stock (NestJS, React Admin), e introdotto CI, test su database ed e2e e i flussi di lavoro con agenti Claude Code.",
@@ -131,7 +127,6 @@ export const experience: Job[] = [
         name: "Tomura",
         hidden: true,
         role: t("Product Engineer", "Product Engineer"),
-        period: t("Jun 2026", "giu 2026"),
         summary: t(
           "Product and architecture analysis of an inherited conversational-BI prototype (Airbyte, DuckDB, dbt, WrenAI), run with Claude Code agents: vision, positioning, and ADRs for a provider-agnostic agent layer and a schema-mapping agent.",
           "Analisi di prodotto e architettura di un prototipo ereditato di BI conversazionale (Airbyte, DuckDB, dbt, WrenAI), condotta con agenti Claude Code: visione, posizionamento e ADR per un livello di agenti indipendente dal provider e un agente di mappatura degli schemi.",
@@ -140,7 +135,6 @@ export const experience: Job[] = [
       {
         name: "E-One",
         role: t("Software Engineer", "Software Engineer"),
-        period: t("Jan – Mar 2025", "gen – mar 2025"),
         summary: t(
           "New behaviour in a legacy CRM (PHP 5.6, Symfony 2.3) through targeted refactoring and tests, without breaking changes.",
           "Nuove funzionalità in un CRM legacy (PHP 5.6, Symfony 2.3) con refactoring mirato e test, senza introdurre regressioni.",
