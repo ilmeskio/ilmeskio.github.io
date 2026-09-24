@@ -9,6 +9,7 @@ import {
   languages,
   photo,
   profile,
+  projects,
   skills,
   years,
   type Lang,
@@ -54,6 +55,21 @@ const { lang } = Astro.props;
       ))
     }
   </ul>
+
+  <section class="section" aria-labelledby="projects">
+    <h2 id="projects">{labels.projects[lang]}</h2>
+    <div>
+      {
+        projects.map((p) => (
+          <article class="entry">
+            <h3><a href={p.url}>{p.name}</a></h3>
+            <p class="meta">{p.period[lang]}</p>
+            <p>{p.summary[lang]}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 
   <section class="section" aria-labelledby="experience">
     <h2 id="experience">{labels.experience[lang]}</h2>

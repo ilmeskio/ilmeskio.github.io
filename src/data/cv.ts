@@ -32,11 +32,11 @@ const t = (en: string, it: string): Text => ({ en, it });
 
 export const profile = {
   name: "Gabriele Consiglio",
-  headline: t("Freelance software developer & consultant", "Sviluppatore software e consulente freelance"),
+  headline: t("Freelance product engineer", "Product engineer freelance"),
   location: t("Milan, Italy", "Milano"),
   summary: t(
-    "Full-stack engineer with more than ten years of building web applications, in the cloud and on premise. Former CTO and product manager: I help teams decide what is worth building, then build it with them, with AI coding agents as part of the team.",
-    "Ingegnere full-stack con più di dieci anni di applicazioni web, in cloud e on premise. Ex CTO e product manager: aiuto i team a decidere cosa vale la pena costruire, e poi lo costruisco con loro, con gli agenti AI come parte del team.",
+    "I'm a product engineer: a former CTO and product manager who has been building web applications for more than ten years. I bring AI into teams as a shared tool: product, design and engineering work in the same flow, together with the agents the team coordinates. A shared language and clear practices let the team move fast without losing quality, with each person working where they are strongest and everyone aligned with the business goals. I'm gathering this way of working in Lunette, my open-source project.",
+    "Sono un product engineer: ex CTO e product manager, costruisco applicazioni web da più di dieci anni. Porto l'AI nei team come strumento condiviso: prodotto, design e sviluppo lavorano nello stesso flusso, insieme agli agenti che il team coordina. Un linguaggio comune e pratiche chiare permettono al team di andare veloce senza perdere qualità, con ognuno dove rende meglio e tutti allineati agli obiettivi di business. Sto raccogliendo questo modo di lavorare in Lunette, il mio progetto open source.",
   ),
   email: "gabriele@consiglio.fyi",
   github: "ilmeskio",
@@ -68,6 +68,7 @@ export const highlights: { label: Text; items: Text[] }[] = [
     label: t("Method", "Metodo"),
     items: [
       t("Agentic development", "Sviluppo agentico"),
+      t("Domain-Driven Design", "Domain-Driven Design"),
       t("Product discovery", "Product discovery"),
       t("Agile / Kanban", "Agile / Kanban"),
       t("Lean, mobile-first", "Lean, mobile-first"),
@@ -97,24 +98,39 @@ export const experience: Job[] = [
     ],
     clients: [
       {
-        name: "Tomura",
-        role: t("Product Engineer", "Product Engineer"),
-      },
-      {
         name: "WAI",
         role: t("Product Engineer", "Product Engineer"),
+        period: t("Mar 2026 – present", "mar 2026 – oggi"),
+        summary: t(
+          "Rewrite of an association's legacy PHP intranet as a TypeScript monorepo, on the Lunette starter and agentic workflow: encrypted personal data, member area, design system with visual tests, headless CMS.",
+          "Riscrittura dell'intranet PHP di un'associazione in un monorepo TypeScript, sullo starter e sul flusso agentico di Lunette: dati personali cifrati, area soci, design system con test visuali, CMS headless.",
+        ),
+      },
+      {
+        name: "Discentis",
+        role: t("Product Engineer", "Product Engineer"),
+        period: t("Feb 2025 – present", "feb 2025 – oggi"),
+        summary: t(
+          "Sole engineer of an international community of teachers. From a first platform (OAuth accounts, self-hosted Moodle, GCP infrastructure as code) to a TypeScript monorepo with forum, resources, events and posts translated automatically into four languages. Built with the Lunette agentic workflow.",
+          "Unico ingegnere di una community internazionale di insegnanti. Da una prima piattaforma (account OAuth, Moodle self-hosted, infrastruttura GCP as code) a un monorepo TypeScript con forum, risorse, eventi e post tradotti automaticamente in quattro lingue. Sviluppata con il flusso agentico di Lunette.",
+        ),
       },
       {
         name: "Foorban",
         role: t("Product Engineer", "Product Engineer"),
+        period: t("Dec 2025 – Jul 2026", "dic 2025 – lug 2026"),
+        summary: t(
+          "Vending and smart-locker operator. Built rule-based pricing and the fleet cockpit with automatic stock transfers (NestJS, React Admin), and introduced CI, database and e2e tests, and Claude Code agent workflows.",
+          "Operatore di vending e smart locker. Ho costruito il listino prezzi a regole e il cockpit della flotta con i trasferimenti automatici di stock (NestJS, React Admin), e introdotto CI, test su database ed e2e e i flussi di lavoro con agenti Claude Code.",
+        ),
       },
       {
-        name: "Discentis",
-        role: t("Software Engineer", "Software Engineer"),
-        period: t("2025 – present", "2025 – oggi"),
+        name: "Tomura",
+        role: t("Product Engineer", "Product Engineer"),
+        period: t("Jun 2026", "giu 2026"),
         summary: t(
-          "Technical foundation of the community platform, as a TypeScript monorepo.",
-          "Fondamenta tecniche della piattaforma per la community, in un monorepo TypeScript.",
+          "Product and architecture analysis of an inherited conversational-BI prototype (Airbyte, DuckDB, dbt, WrenAI), run with Claude Code agents: vision, positioning, and ADRs for a provider-agnostic agent layer and a schema-mapping agent.",
+          "Analisi di prodotto e architettura di un prototipo ereditato di BI conversazionale (Airbyte, DuckDB, dbt, WrenAI), condotta con agenti Claude Code: visione, posizionamento e ADR per un livello di agenti indipendente dal provider e un agente di mappatura degli schemi.",
         ),
       },
       {
@@ -210,6 +226,18 @@ export const experience: Job[] = [
   },
 ];
 
+export const projects: { name: string; url: string; period: Text; summary: Text }[] = [
+  {
+    name: "Lunette",
+    url: "https://github.com/LunetteOrg/lunette",
+    period: t("2026 – present", "2026 – oggi"),
+    summary: t(
+      "My open-source toolkit for building products with a team of AI agents, grown out of Discentis and WAI. The method: a five-persona review panel (architecture, backend, design system, QA, release) run as a round table; scripted sprints in which each story goes through TDD, adversarial review and fixes; retrospectives, collected from commit trailers, that turn lessons into new skills, hooks and ADRs. The code: a library for typed dependency wiring as a chain of layers (Effect-grade composition with plain functions), a TypeScript monorepo starter and the @lntt/create CLI.",
+      "Il mio toolkit open source per costruire prodotti con un team di agenti AI, nato da Discentis e WAI. Il metodo: un panel di revisione con cinque persona (architettura, backend, design system, QA, rilascio) che lavora come una tavola rotonda; sprint scriptati in cui ogni storia passa per TDD, revisione avversariale e correzioni; retrospettive, raccolte dai trailer dei commit, che trasformano le lezioni in nuove skill, hook e ADR. Il codice: una libreria per comporre le dipendenze come catena di layer (la composizione di Effect con funzioni semplici), uno starter per monorepo TypeScript e la CLI @lntt/create.",
+    ),
+  },
+];
+
 export const community = [
   {
     name: "Product Personas",
@@ -237,7 +265,7 @@ export const skills: { group: Text; items: string[] }[] = [
   },
   {
     group: t("Product and method", "Prodotto e metodo"),
-    items: ["Claude Code agents", "Product discovery", "Product analytics", "PostHog", "Roadmapping", "Agile / Kanban"],
+    items: ["Claude Code agents", "Domain-Driven Design", "Product discovery", "Product analytics", "PostHog", "Roadmapping", "Agile / Kanban"],
   },
 ];
 
@@ -262,6 +290,7 @@ export const languages: { name: Text; level: Text }[] = [
 
 export const labels = {
   experience: t("Experience", "Esperienza"),
+  projects: t("Projects", "Progetti"),
   clients: t("Clients", "Clienti"),
   community: t("Community", "Community"),
   skills: t("Skills", "Competenze"),
