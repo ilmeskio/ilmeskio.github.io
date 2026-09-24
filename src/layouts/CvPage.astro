@@ -18,7 +18,7 @@ const description = {
 }[lang];
 ---
 
-<Base title={`CV — ${profile.name}`} description={description} lang={lang} alternates={paths} home={home}>
+<Base title={`CV — ${profile.name}`} description={description} lang={lang} alternates={paths} ogImage={`/og/${lang}.png`} home={home}>
   <LangNav slot="nav" lang={lang} {...paths} />
 
   <Cv lang={lang} />
