@@ -17,10 +17,11 @@ Both are squashed git subtrees, excluded from `tsconfig.json`; never edit them b
 
 ## How the pages fit together
 
-- `src/layouts/Base.astro` is the shell of every page: `<head>` (Google Fonts Newsreader + IBM Plex Mono, favicon, canonical URL), the `.wrap > .topbar / main / .footer` skeleton, and two named slots, `nav` (top bar) and `footer`.
+- `src/layouts/Base.astro` is the shell of every page: `<head>` (EB Garamond and IBM Plex Mono, self-hosted through the `@fontsource/*` packages; favicons made from the portrait in `public/`; canonical URL), the `.wrap > .topbar / main / .footer` skeleton, and two named slots, `nav` (top bar) and `footer`.
 - Two page families, each with its own layout on top of `Base`:
   - Home — `HomePage.astro`, used by `/` (EN) and `/it/` (IT). It renders `src/components/Home.astro` from `src/data/home.ts`: a manifesto and short lists, one line per item.
   - CV — `CvPage.astro`, used by `/cv/` and `/it/cv/`. It renders `src/components/Cv.astro` from `src/data/cv.ts`. A freelance client needs only a name and a role; period and summary render when present; `hidden: true` keeps an entry in the data without showing it. The print rules in `global.css` fit this page on one A4 sheet: check the page count after adding content.
+  - Link previews — `src/pages/og/[lang].png.ts` renders `/og/en.png` and `/og/it.png` at build time (satori + resvg) from the portrait, `profile` and `home.manifesto`; the three personal layouts pass it to `Base` as `ogImage`.
   - Europass — `EuropassPage.astro`, used by `/cv/europass/` and `/it/cv/europass/`, renders the same `cv.ts` data in the Europass sections and order.
   - In both data files every text is a `{ en, it }` pair (built with `t()`), so both languages change together. `LangNav.astro` is the EN/IT switch; each layout passes the paths of its two versions, which also become the `hreflang` alternates.
   - App pages — `AppPage.astro`, used by `claude-mcp/`, `claude-mcp/privacy/`, `claude-mcp/terms/`. It owns the App/Privacy/Terms nav (`aria-current` on the current page), the footer links and the closing Contact section; the page supplies only its body. The personal pages and the app pages do not link to each other.

@@ -1,6 +1,20 @@
 ---
 // Shell shared by every page: <head>, top bar, footer.
 // Pages fill the "nav" slot (top bar, right side) and, optionally, the "footer" slot.
+// Fonts are self-hosted (Fontsource), Latin subsets only: the woff2 files ship
+// with the build, so no third-party font service is contacted.
+import "@fontsource/eb-garamond/latin-400.css";
+import "@fontsource/eb-garamond/latin-ext-400.css";
+import "@fontsource/eb-garamond/latin-400-italic.css";
+import "@fontsource/eb-garamond/latin-ext-400-italic.css";
+import "@fontsource/eb-garamond/latin-500.css";
+import "@fontsource/eb-garamond/latin-ext-500.css";
+import "@fontsource/eb-garamond/latin-600.css";
+import "@fontsource/eb-garamond/latin-ext-600.css";
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "@fontsource/ibm-plex-mono/latin-ext-400.css";
+import "@fontsource/ibm-plex-mono/latin-500.css";
+import "@fontsource/ibm-plex-mono/latin-ext-500.css";
 import "../styles/global.css";
 
 interface Props {
@@ -9,12 +23,15 @@ interface Props {
   lang?: "en" | "it";
   /** Paths of the English and Italian versions of this page, emitted as hreflang alternates. */
   alternates?: { en: string; it: string };
+  /** Path of the Open Graph image for link previews (see src/pages/og/). */
+  ogImage?: string;
   /** Target and text of the top-left link. */
   home?: string;
   brand?: string;
 }
 
-const { title, description, lang = "en", alternates, home = "/", brand = "consiglio.fyi" } = Astro.props;
+const { title, description, lang = "en", alternates, ogImage, home = "/", brand = "consiglio.fyi" } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -24,7 +41,24 @@ const { title, description, lang = "en", alternates, home = "/", brand = "consig
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="consiglio.fyi" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:locale" content={lang === "it" ? "it_IT" : "en_US"} />
+    {
+      ogImage && (
+        <>
+          <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={description} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </>
+      )
+    }
     {
       alternates && (
         <>
@@ -33,13 +67,9 @@ const { title, description, lang = "en", alternates, home = "/", brand = "consig
         </>
       )
     }
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
-    />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body>
     <div class="wrap">

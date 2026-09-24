@@ -15,7 +15,7 @@ const paths = { en: "/", it: "/it/" };
 const description = `${profile.name} — ${profile.headline[lang]}. ${home.manifesto[lang]}`;
 ---
 
-<Base title={profile.name} description={description} lang={lang} alternates={paths} home={paths[lang]}>
+<Base title={profile.name} description={description} lang={lang} alternates={paths} ogImage={`/og/${lang}.png`} home={paths[lang]}>
   <LangNav slot="nav" lang={lang} {...paths} />
 
   <Home lang={lang} />

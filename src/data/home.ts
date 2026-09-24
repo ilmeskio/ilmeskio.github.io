@@ -14,8 +14,8 @@ export interface Item {
 
 export const home = {
   manifesto: t(
-    "I get product, design, engineering and AI agents working together. Fast, without losing quality.",
-    "Faccio lavorare insieme prodotto, design, sviluppo e agenti AI. Veloce, senza perdere qualità.",
+    "I get people from product, design and engineering working together with AI agents. Fast, without losing quality.",
+    "Faccio lavorare insieme persone di prodotto, design, sviluppo e agenti AI. Veloce, senza perdere qualità.",
   ),
 
   now: [
