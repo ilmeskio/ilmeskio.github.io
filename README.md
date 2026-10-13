@@ -11,6 +11,7 @@ Personal site of Gabriele Consiglio, built with [Astro](https://astro.build) and
 | `/claude-mcp/` | Home page of the `claude-mcp` Google OAuth app |
 | `/claude-mcp/privacy/` | Its privacy policy |
 | `/claude-mcp/terms/` | Its terms of service |
+| `/privacy/`, `/terms/` | Redirects to the `claude-mcp` pages, their earlier address (`redirects` in `astro.config.mjs`) |
 
 The `claude-mcp` pages are not linked from the personal pages, and they do not link back to them.
 
